@@ -1,4 +1,4 @@
-stage('Build Base Images') {
+stage('Base Images') {
     def imagesToBuild = [
         "ubuntu-server-16.04"
     ]
@@ -13,7 +13,7 @@ stage('Build Base Images') {
     parallel stepsForParallel
 }
 
-stage('Build Final Images') {
+stage('Generic Images') {
     def imagesToBuild = [
         "network-lead",
         "ubuntu-nginx-phpdev-7.0"
@@ -29,27 +29,32 @@ stage('Build Final Images') {
     parallel stepsForParallel
 }
 
+stage('App Images') {
+    def imagesToBuild = [
+    ]
+
+    def stepsForParallel = [:]
+
+    for (int i = 0; i < imagesToBuild.size(); i++) {
+        def imageName = imagesToBuild.get(i)
+        stepsForParallel[imageName] = buildImage(imageName)
+    }
+
+    parallel stepsForParallel
+}
+
 def buildImage(imageName) {
     return {
         node('docker') {
-            checkout scm
-            sh 'cd ' + env.WORKSPACE + '/' + imageName + ' && make build'
-        }
-    }
-}
-
-stage('Publish') {
-    def imagesToPublish = [
-        "ubuntu-server-16.04",
-        "ubuntu-nginx-phpdev-7.0",
-        "network-lead"
-    ]
-
-    node('docker') {
-        for (int i = 0; i < imagesToPublish.size(); i++) {
-            def imageName = imagesToPublish.get(i)
-
-            sh 'cd ' + env.WORKSPACE + '/' + imageName + ' && make publish'
+            stage "git checkout" {
+                checkout scm
+            }
+            stage build {
+                sh 'cd ' + env.WORKSPACE + '/' + imageName + ' && make build'
+            }
+            stage publish {
+                sh 'cd ' + env.WORKSPACE + '/' + imageName + ' && make publish'
+            }
         }
     }
 }
