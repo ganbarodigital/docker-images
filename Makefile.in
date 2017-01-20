@@ -32,7 +32,7 @@
 
 # shared makefile for building containers on Linux
 # tested on Ubuntu 16.04
-BRANCH_NAME := $(shell git describe --tags --exact-match 2>/dev/null || git symbolic-ref -q --short HEAD || echo HEAD)
+BRANCH_NAME := $(shell git describe --tags --exact-match 2>/dev/null || git symbolic-ref -q --short HEAD || echo $(BRANCH_NAME))
 BUILD_LABEL := $(shell echo $(BRANCH_NAME) | sed -e 's|^release/\(.*\)|\1-rc|g;' | sed -e 's|/|-|g;')
 ifeq ($(origin IMAGE_LABEL), undefined)
   IMAGE_LABEL?=latest
