@@ -1,0 +1,86 @@
+# Copyright 2015-present Ganbaro Digital Ltd
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+#
+#   * Redistributions of source code must retain the above copyright
+#     notice, this list of conditions and the following disclaimer.
+#
+#   * Redistributions in binary form must reproduce the above copyright
+#     notice, this list of conditions and the following disclaimer in
+#     the documentation and/or other materials provided with the
+#     distribution.
+#
+#   * Neither the names of the copyright holders nor the names of his
+#     contributors may be used to endorse or promote products derived
+#     from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+# "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+# LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+# FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+# COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+# INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+# BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+# ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
+# shared makefile for building containers on Linux
+# tested on Ubuntu 16.04
+NETWORK?=lamp
+ifeq ($(origin BRANCH_NAME), undefined)
+  BRANCH_NAME := $(shell git symbolic-ref -q --short HEAD || git describe --tags --exact-match)
+endif
+ifeq ($(origin BUILD_LABEL), undefined)
+  BUILD_LABEL := $(shell echo $(BRANCH_NAME) | sed -e 's|^release/\(.*\)|\1-rc|g;' | sed -e 's|/|-|g;')
+endif
+ifeq ($(origin IMAGE_LABEL), undefined)
+  IMAGE_LABEL?=latest
+else
+  IMAGE_LABEL := $(IMAGE_LABEL)-$(BUILD_LABEL)
+endif
+IMAGE_BASENAME=$(shell echo $(IMAGE_NAME) | sed -e 's|.*/||g;')
+CONTAINER_NAME=$(IMAGE_BASENAME)-$(IMAGE_LABEL)-test.$(NETWORK)
+ALIAS_NAME=$(IMAGE_BASENAME).$(NETWORK)
+HOSTNAME=$(IMAGE_BASENAME)
+
+WORKSPACE_DIR=$(shell pwd -L)/../../../
+IMAGES_DIR=$(shell pwd -L)/../../images
+
+BUILD_OPTIONS=--rm=true -t $(IMAGE_NAME):$(IMAGE_LABEL) .
+RUN_OPTIONS=--name=$(CONTAINER_NAME) --hostname=$(HOSTNAME) --net=$(NETWORK) --net-alias=$(ALIAS_NAME) -v $(WORKSPACE_DIR):/vagrant -v $(WORKSPACE_DIR):/workspace $(IMAGE_NAME):$(IMAGE_LABEL)
+
+.PHONY: bash build ip publish rebuild remove run stop
+
+all: bash build ip rebuild remove run stop run
+
+bash: remove
+	docker run -t -i $(RUN_OPTIONS) /bin/bash
+
+build: remove
+	docker build $(BUILD_OPTIONS)
+
+ip:
+	@docker inspect -f "{{ .NetworkSettings.Networks.$(NETWORK).IPAddress }}" $(CONTAINER_NAME)
+
+publish:
+	docker push $(IMAGE_NAME):$(IMAGE_LABEL)
+
+rebuild:
+	-docker rmi -f $(IMAGE_NAME):$(IMAGE_LABEL)
+	docker build --no-cache $(BUILD_OPTIONS)
+
+remove: stop
+	-@docker rm -f $(CONTAINER_NAME)
+
+run: remove
+	docker run -d $(RUN_OPTIONS)
+	@make ip
+
+stop:
+	-@docker stop $(CONTAINER_NAME)
