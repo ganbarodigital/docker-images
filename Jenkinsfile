@@ -25,8 +25,8 @@ stage('App Images') {
 def buildImages(imageList) {
     def stepsForParallel = [:]
 
-    for (int i = 0; i < imagesToBuild.size(); i++) {
-        def imageName = imagesToBuild.get(i)
+    for (int i = 0; i < imageList.size(); i++) {
+        def imageName = imageList.get(i)
         stepsForParallel[imageName] = buildImage(imageName)
     }
 
