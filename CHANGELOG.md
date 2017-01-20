@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## develop
+
+### Fixes
+
+- Jenkins CI
+  - run `make build publish` as single step
+
 ## 1.0.3
 
 Released Fri 21st Jan 2017.
