@@ -46,13 +46,13 @@ stage('App Images') {
 def buildImage(imageName) {
     return {
         node('docker') {
-            stage "git checkout" {
+            stage ("git checkout") {
                 checkout scm
             }
-            stage build {
+            stage ("build") {
                 sh 'cd ' + env.WORKSPACE + '/' + imageName + ' && make build'
             }
-            stage publish {
+            stage ("publish") {
                 sh 'cd ' + env.WORKSPACE + '/' + imageName + ' && make publish'
             }
         }
