@@ -33,7 +33,14 @@
 # shared makefile for building containers on Linux
 # tested on Ubuntu 16.04
 NETWORK?=lamp
-IMAGE_LABEL?=latest
+ifeq ($(origin BRANCH_NAME), undefined)
+  BRANCH_NAME := $(shell git symbolic-ref HEAD | sed 's!refs\/heads\/!!')
+endif
+ifeq ($(origin IMAGE_LABEL), undefined)
+  IMAGE_LABEL?=latest
+else ifneq ($(BRANCH_NAME), "master")
+  IMAGE_LABEL := $(IMAGE_LABEL)-$(BRANCH_NAME)
+endif
 IMAGE_BASENAME=$(shell echo $(IMAGE_NAME) | sed -e 's|.*/||g;')
 CONTAINER_NAME=$(IMAGE_BASENAME)-$(IMAGE_LABEL)-test.$(NETWORK)
 ALIAS_NAME=$(IMAGE_BASENAME).$(NETWORK)
@@ -45,7 +52,7 @@ IMAGES_DIR=$(shell pwd -L)/../../images
 BUILD_OPTIONS=--rm=true -t $(IMAGE_NAME):$(IMAGE_LABEL) .
 RUN_OPTIONS=--name=$(CONTAINER_NAME) --hostname=$(HOSTNAME) --net=$(NETWORK) --net-alias=$(ALIAS_NAME) -v $(WORKSPACE_DIR):/vagrant -v $(WORKSPACE_DIR):/workspace $(IMAGE_NAME):$(IMAGE_LABEL)
 
-.PHONY: bash build ip rebuild remove run stop
+.PHONY: bash build ip publish rebuild remove run stop
 
 all: bash build ip rebuild remove run stop run
 
@@ -57,6 +64,9 @@ build: remove
 
 ip:
 	@docker inspect -f "{{ .NetworkSettings.Networks.$(NETWORK).IPAddress }}" $(CONTAINER_NAME)
+
+publish:
+	docker push $(IMAGE_NAME):$(IMAGE_LABEL)
 
 rebuild:
 	-docker rmi -f $(IMAGE_NAME):$(IMAGE_LABEL)

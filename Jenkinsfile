@@ -4,3 +4,9 @@ stage('Build') {
         sh 'make build'
     }
 }
+
+stage('Publish') {
+    node ('docker') {
+        sh 'make publish'
+    }
+}
