@@ -1,29 +1,52 @@
 stage('Build Base Images') {
-    parallel ubuntu-server-1604: {
-        node ('docker') {
-            checkout scm
-            sh 'cd ubuntu-server-16.04 && make build'
-        }
+    def imagesToBuild = [
+        "ubuntu-server-16.04"
+    ]
+
+    def stepsForParallel = [:]
+
+    for (int i = 0; i < imagesToBuild.size(); i++) {
+        def imageName = imagesToBuild.get(i)
+        stepsForParallel["Build ${imageName}"] = buildImage(imageName)
     }
+
+    parallel stepsForParallel
 }
 
 stage('Build Final Images') {
-    parallel network-lead: {
+    def imagesToBuild = [
+        "network-lead",
+        "ubuntu-nginx-phpdev-7.0"
+    ]
+
+    for (int i = 0; i < imagesToBuild.size(); i++) {
+        def imageName = imagesToBuild.get(i)
+        stepsForParallel[imageName] = buildImage(imageName)
+    }
+
+    parallel stepsForParallel
+}
+
+function buildImage(imageName) {
+    return {
         node('docker') {
-            sh 'cd network-lead && make build'
-        }
-    },
-    parallel ubuntu-nginx-phpdev-70: {
-        node('docker') {
-            sh 'cd ubuntu-nginx-phpdev-7.0 && make build'
+            sh 'cd ' + imageName + ' && make build'
         }
     }
 }
 
 stage('Publish') {
-    node ('docker') {
-        sh 'cd ubuntu-server-16.04 && make publish'
-        sh 'cd network-lead && make publish'
-        sh 'cd ubuntu-nginx-phpdev-7.0 && make publish'
+    def imagesToPublish = [
+        "ubuntu-server-16.04",
+        "ubuntu-nginx-phpdev-7.0",
+        "network-lead"
+    ]
+
+    for (int i = 0; i < imagesToPublish.size(); i++) {
+        def imageName = imagesToPublish.get(i)
+
+        node('docker') {
+            sh 'cd ' + imageName + ' && make publish'
+        }
     }
 }
