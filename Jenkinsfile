@@ -19,6 +19,8 @@ stage('Build Final Images') {
         "ubuntu-nginx-phpdev-7.0"
     ]
 
+    def stepsForParallel = [:]
+
     for (int i = 0; i < imagesToBuild.size(); i++) {
         def imageName = imagesToBuild.get(i)
         stepsForParallel[imageName] = buildImage(imageName)
