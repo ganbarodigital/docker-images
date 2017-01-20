@@ -45,11 +45,10 @@ stage('Publish') {
         "network-lead"
     ]
 
-    for (int i = 0; i < imagesToPublish.size(); i++) {
-        def imageName = imagesToPublish.get(i)
+    node('docker') {
+        for (int i = 0; i < imagesToPublish.size(); i++) {
+            def imageName = imagesToPublish.get(i)
 
-        node('docker') {
-            checkout scm
             sh 'cd ' + env.WORKSPACE + '/' + imageName + ' && make publish'
         }
     }
