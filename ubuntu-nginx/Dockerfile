@@ -30,16 +30,14 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-FROM ganbarodigital/ubuntu-nginx:16.04-develop
+FROM ganbarodigital/ubuntu-server:16.04-develop
 MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
-# PHP-FPM for Nginx
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y php-fpm php-dev php-pear php-mysql php-bz2 php-intl php-mbstring php-memcache php-phpdbg php-curl
-RUN sed -i -e 's|;daemonize = yes|daemonize = no|' /etc/php/7.0/fpm/php-fpm.conf
-RUN mkdir /run/php
-RUN chown www-data:www-data /run/php
-COPY supervisor.php-fpm.conf /etc/supervisor/conf.d/php-fpm.conf
-COPY fpm.php.ini /etc/php/7.0/fpm/php.ini
-
-# MySQL
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-client
+# Nginx
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y nginx
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx.php-fpm.conf /etc/nginx/php-fpm.conf
+COPY nginx.drop.conf /etc/nginx/drop.conf
+COPY supervisor.nginx.conf /etc/supervisor/conf.d/nginx.conf
+COPY nginx-logs.sh /usr/local/image-startup
+RUN chmod 755 /usr/local/image-startup/nginx-logs.sh

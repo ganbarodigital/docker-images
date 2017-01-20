@@ -1,4 +1,4 @@
-stage('Base Images') {
+stage('Base Image') {
     def imagesToBuild = [
         "ubuntu-server-16.04"
     ]
@@ -6,17 +6,18 @@ stage('Base Images') {
     buildImages(imagesToBuild)
 }
 
-stage('Generic Images') {
+stage('Dep 1 Images') {
     def imagesToBuild = [
         "network-lead",
-        "ubuntu-nginx-phpdev-7.0"
+        "ubuntu-nginx"
     ]
 
     buildImages(imagesToBuild)
 }
 
-stage('App Images') {
+stage('Dep 2 Images') {
     def imagesToBuild = [
+        "ubuntu-nginx-phpdev-7.0"
     ]
 
     buildImages(imagesToBuild)
