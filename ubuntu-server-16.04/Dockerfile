@@ -52,7 +52,16 @@ RUN mkdir -m 0777 /workspace
 
 # Supervisor
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y supervisor
+COPY supervisord.conf /etc/supervisor/supervisord.conf
+
+# Our image-startup feature
+RUN mkdir -m 0755 /usr/local/image-startup
+COPY image-startup.sh /usr/local/sbin/image-startup.sh
+RUN chmod 755 /usr/local/sbin/image-startup.sh
+
+# on startup ...
+COPY 01-create-workspace-logs.sh /usr/local/image-startup/
+RUN chmod 755 /usr/local/image-startup/01-create-workspace-logs.sh
 
 # all done
-COPY supervisord.conf /etc/supervisor/supervisord.conf
-CMD /usr/bin/supervisord -c /etc/supervisor/supervisord.conf
+CMD /usr/local/sbin/image-startup.sh
