@@ -34,7 +34,7 @@
 # tested on Ubuntu 16.04
 NETWORK?=lamp
 ifeq ($(origin BRANCH_NAME), undefined)
-  BRANCH_NAME := $(shell git describe --tags --exact-match 2>dev/null || git symbolic-ref -q --short HEAD || echo HEAD))
+  BRANCH_NAME := $(shell git describe --tags --exact-match 2>/dev/null || git symbolic-ref -q --short HEAD || echo HEAD)
 endif
 ifeq ($(origin BUILD_LABEL), undefined)
   BUILD_LABEL := $(shell echo $(BRANCH_NAME) | sed -e 's|^release/\(.*\)|\1-rc|g;' | sed -e 's|/|-|g;')
