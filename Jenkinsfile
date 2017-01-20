@@ -3,14 +3,7 @@ stage('Base Images') {
         "ubuntu-server-16.04"
     ]
 
-    def stepsForParallel = [:]
-
-    for (int i = 0; i < imagesToBuild.size(); i++) {
-        def imageName = imagesToBuild.get(i)
-        stepsForParallel[imageName] = buildImage(imageName)
-    }
-
-    parallel stepsForParallel
+    buildImages(imagesToBuild)
 }
 
 stage('Generic Images') {
@@ -19,20 +12,17 @@ stage('Generic Images') {
         "ubuntu-nginx-phpdev-7.0"
     ]
 
-    def stepsForParallel = [:]
-
-    for (int i = 0; i < imagesToBuild.size(); i++) {
-        def imageName = imagesToBuild.get(i)
-        stepsForParallel[imageName] = buildImage(imageName)
-    }
-
-    parallel stepsForParallel
+    buildImages(imagesToBuild)
 }
 
 stage('App Images') {
     def imagesToBuild = [
     ]
 
+    buildImages(imagesToBuild)
+}
+
+def buildImages(imageList) {
     def stepsForParallel = [:]
 
     for (int i = 0; i < imagesToBuild.size(); i++) {
