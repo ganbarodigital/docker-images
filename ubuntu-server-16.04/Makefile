@@ -37,6 +37,5 @@
 
 IMAGE_NAME=ganbarodigital/ubuntu-server
 IMAGE_LABEL=16.04
-BUILD_LABEL=1.0.1
 
 include ../Makefile.in
