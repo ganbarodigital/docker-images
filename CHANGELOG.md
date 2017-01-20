@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.0.3
+
+Released Fri 21st Jan 2017.
+
+### Fixes
+
+- More fixes for problems with building on Jenkins.
+
 ## 1.0.2
 
 Released Fri 21st Jan 2017.
