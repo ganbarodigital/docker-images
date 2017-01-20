@@ -34,14 +34,15 @@
 # tested on Ubuntu 16.04
 NETWORK?=lamp
 ifeq ($(origin BRANCH_NAME), undefined)
-  BRANCH_NAME := $(shell git symbolic-ref HEAD | sed 's!refs\/heads\/!!')
+  BRANCH_NAME := $(shell git symbolic-ref -q --short HEAD || git describe --tags --exact-match)
+endif
+ifeq ($(origin BUILD_LABEL), undefined)
+  BUILD_LABEL := $(shell echo $(BRANCH_NAME) | sed -e 's|^release/\(.*\)|\1-rc|g;' | sed -e 's|/|-|g;')
 endif
 ifeq ($(origin IMAGE_LABEL), undefined)
   IMAGE_LABEL?=latest
-else ifneq ($(BRANCH_NAME), "master")
-  IMAGE_LABEL := $(IMAGE_LABEL)-$(BRANCH_NAME)
 else
-  IMAGE_LABEL := $(IMAGE_LABEL)-$(shell date '+%y%m%d-%H%M%S')
+  IMAGE_LABEL := $(IMAGE_LABEL)-$(BUILD_LABEL)
 endif
 IMAGE_BASENAME=$(shell echo $(IMAGE_NAME) | sed -e 's|.*/||g;')
 CONTAINER_NAME=$(IMAGE_BASENAME)-$(IMAGE_LABEL)-test.$(NETWORK)
