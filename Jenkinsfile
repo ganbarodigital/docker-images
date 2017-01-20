@@ -7,7 +7,7 @@ stage('Build Base Images') {
 
     for (int i = 0; i < imagesToBuild.size(); i++) {
         def imageName = imagesToBuild.get(i)
-        stepsForParallel["Build ${imageName}"] = buildImage(imageName)
+        stepsForParallel[imageName] = buildImage(imageName)
     }
 
     parallel stepsForParallel
