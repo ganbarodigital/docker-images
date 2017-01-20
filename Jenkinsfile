@@ -27,7 +27,7 @@ stage('Build Final Images') {
     parallel stepsForParallel
 }
 
-function buildImage(imageName) {
+def buildImage(imageName) {
     return {
         node('docker') {
             sh 'cd ' + imageName + ' && make build'
