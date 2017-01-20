@@ -32,7 +32,7 @@ stage('Build Final Images') {
 def buildImage(imageName) {
     return {
         node('docker') {
-            sh 'cd ' + imageName + ' && make build'
+            sh 'cd ' + env.WORKSPACE + '/' + imageName + ' && make build'
         }
     }
 }
@@ -48,7 +48,7 @@ stage('Publish') {
         def imageName = imagesToPublish.get(i)
 
         node('docker') {
-            sh 'cd ' + imageName + ' && make publish'
+            sh 'cd ' + env.WORKSPACE + '/' + imageName + ' && make publish'
         }
     }
 }
