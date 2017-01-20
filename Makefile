@@ -30,11 +30,12 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-build: build-ubuntu-server
-publish: publish-ubuntu-server
+.PHONEY: build publish
 
-build-ubuntu-server:
+build:
 	cd ubuntu-server-16.04 && make build
+	cd ubuntu-nginx-phpdev-7.0 && make build
 
-publish-ubuntu-server:
+publish:
 	cd ubuntu-server-16.04 && make publish
+	cd ubuntu-nginx-phpdev-7.0 && make publish
