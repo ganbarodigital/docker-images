@@ -32,13 +32,8 @@
 
 # shared makefile for building containers on Linux
 # tested on Ubuntu 16.04
-NETWORK?=lamp
-ifeq ($(origin BRANCH_NAME), undefined)
-  BRANCH_NAME := $(shell git describe --tags --exact-match 2>/dev/null || git symbolic-ref -q --short HEAD || echo HEAD)
-endif
-ifeq ($(origin BUILD_LABEL), undefined)
-  BUILD_LABEL := $(shell echo $(BRANCH_NAME) | sed -e 's|^release/\(.*\)|\1-rc|g;' | sed -e 's|/|-|g;')
-endif
+BRANCH_NAME := $(shell git describe --tags --exact-match 2>/dev/null || git symbolic-ref -q --short HEAD || echo HEAD)
+BUILD_LABEL := $(shell echo $(BRANCH_NAME) | sed -e 's|^release/\(.*\)|\1-rc|g;' | sed -e 's|/|-|g;')
 ifeq ($(origin IMAGE_LABEL), undefined)
   IMAGE_LABEL?=latest
 else
@@ -48,6 +43,7 @@ IMAGE_BASENAME=$(shell echo $(IMAGE_NAME) | sed -e 's|.*/||g;')
 CONTAINER_NAME=$(IMAGE_BASENAME)-$(IMAGE_LABEL)-test.$(NETWORK)
 ALIAS_NAME=$(IMAGE_BASENAME).$(NETWORK)
 HOSTNAME=$(IMAGE_BASENAME)
+NETWORK?=lamp
 
 WORKSPACE_DIR=$(shell pwd -L)/../../../
 IMAGES_DIR=$(shell pwd -L)/../../images
