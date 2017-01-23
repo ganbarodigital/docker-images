@@ -7,7 +7,7 @@ function has_scripts()
         return 1
     fi
 
-    if ls -A "$1/*.sh" >/dev/null 2>&1 ; then
+    if ls -A $1/*.sh >/dev/null 2>&1 ; then
         echo "Running $2 startup script(s) ..."
         return
     else
@@ -31,7 +31,7 @@ function run_scripts()
 {
     has_scripts "$1" "$2" || return
     for x in `echo $1/*.sh` ; do
-        run_script "$1" || exit 1
+        run_script "$x" || exit 1
     done
 }
 
