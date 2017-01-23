@@ -8,6 +8,12 @@
 
 ### Fixes
 
+- Top-level `Makefile` now builds all images
+  - added `ubuntu-nginx`
+  - added `network-lead`
+
+### Fixes
+
 - Jenkins CI
   - run `make build publish` as single step
 
