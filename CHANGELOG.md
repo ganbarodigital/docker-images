@@ -2,6 +2,14 @@
 
 ## develop
 
+### Refactor
+
+- Change our container volumes to be more flexible
+  - `/config` for loading in config files
+  - `/data` for writing app data to
+  - `/logs` for writing container logs to
+  - `/workspace` for injecting the app for dev work
+
 ### New
 
 - `make XXX` now tells you which image or container it is working with

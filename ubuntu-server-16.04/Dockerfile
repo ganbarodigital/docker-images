@@ -49,6 +49,9 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential pkg-config
 
 # the mount points for Docker volumes
 RUN mkdir -m 0777 /workspace
+RUN mkdir -m 0777 /logs
+RUN mkdir -m 0777 /data
+RUN mkdir -m 0777 /config
 
 # Supervisor
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y supervisor
@@ -58,10 +61,6 @@ COPY supervisord.conf /etc/supervisor/supervisord.conf
 RUN mkdir -m 0755 /usr/local/image-startup
 COPY image-startup.sh /usr/local/sbin/image-startup.sh
 RUN chmod 755 /usr/local/sbin/image-startup.sh
-
-# on startup ...
-COPY 01-create-workspace-logs.sh /usr/local/image-startup/
-RUN chmod 755 /usr/local/image-startup/01-create-workspace-logs.sh
 
 # all done
 CMD /usr/local/sbin/image-startup.sh
