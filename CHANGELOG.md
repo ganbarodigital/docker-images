@@ -10,6 +10,12 @@
   - `/logs` for writing container logs to
   - `/workspace` for injecting the app for dev work
 
+### New
+
+- Image manipulation support for PHP
+  - added GD extension to `ubuntu-nginx-phpdev`
+  - added Imagick extension to `ubuntu-nginx-phpdev`
+
 ### Fixes
 
 - Top-level `Makefile` now builds all images

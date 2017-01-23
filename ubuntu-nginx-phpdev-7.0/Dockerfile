@@ -34,7 +34,7 @@ FROM ganbarodigital/ubuntu-nginx:16.04-develop
 MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
 # PHP-FPM for Nginx
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y php-fpm php-dev php-pear php-mysql php-bz2 php-intl php-mbstring php-memcache php-phpdbg php-curl
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y php-fpm php-dev php-pear php-mysql php-bz2 php-intl php-mbstring php-memcache php-phpdbg php-curl php-gd php-imagick
 COPY nginx.php-fpm.conf /etc/nginx/php-fpm.conf
 COPY php-fpm.conf /etc/php/7.0/fpm/php-fpm.conf
 RUN mkdir /run/php
