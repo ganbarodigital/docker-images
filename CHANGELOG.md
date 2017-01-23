@@ -2,6 +2,10 @@
 
 ## develop
 
+### New
+
+- `make XXX` now tells you which image or container it is working with
+
 ### Fixes
 
 - Jenkins CI
