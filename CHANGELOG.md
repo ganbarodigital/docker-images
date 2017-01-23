@@ -10,15 +10,13 @@
   - `/logs` for writing container logs to
   - `/workspace` for injecting the app for dev work
 
-### New
-
-- `make XXX` now tells you which image or container it is working with
-
 ### Fixes
 
 - Top-level `Makefile` now builds all images
   - added `ubuntu-nginx`
   - added `network-lead`
+- `make XXX` now tells you which image or container it is working with
+- Image startup script now tells you if there are no scripts
 
 ### Fixes
 
