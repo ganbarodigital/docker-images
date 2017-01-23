@@ -32,7 +32,7 @@
 
 # shared makefile for building containers on Linux
 # tested on Ubuntu 16.04
-BRANCH_NAME := $(shell git describe --tags --exact-match 2>/dev/null || git symbolic-ref -q --short HEAD || echo HEAD)
+BRANCH_NAME := $(shell git describe --tags --exact-match 2>/dev/null || git symbolic-ref -q --short HEAD || echo $(BRANCH_NAME))
 BUILD_LABEL := $(shell echo $(BRANCH_NAME) | sed -e 's|^release/\(.*\)|\1-rc|g;' | sed -e 's|/|-|g;')
 ifeq ($(origin IMAGE_LABEL), undefined)
   IMAGE_LABEL?=latest
@@ -56,15 +56,27 @@ RUN_OPTIONS=--name=$(CONTAINER_NAME) --hostname=$(HOSTNAME) --net=$(NETWORK) --n
 all: bash build ip rebuild remove run stop run
 
 bash: remove
+	@echo
+	@echo "Running test container $(CONTAINER_NAME)"
+	@echo "=-=-=-=-=-=-=-=-=-=-="
+	@echo
 	docker run -t -i $(RUN_OPTIONS) /bin/bash
 
 build: remove
+	@echo
+	@echo "Building image $(IMAGE_NAME):$(IMAGE_LABEL)"
+	@echo "=-=-=-=-=-=-=-=-=-=-="
+	@echo
 	docker build $(BUILD_OPTIONS)
 
 ip:
 	@docker inspect -f "{{ .NetworkSettings.Networks.$(NETWORK).IPAddress }}" $(CONTAINER_NAME)
 
 publish:
+	@echo
+	@echo "Publishing image $(IMAGE_NAME):$(IMAGE_LABEL)"
+	@echo "=-=-=-=-=-=-=-=-=-=-="
+	@echo
 	docker push $(IMAGE_NAME):$(IMAGE_LABEL)
 
 rebuild:
@@ -72,11 +84,29 @@ rebuild:
 	docker build --no-cache $(BUILD_OPTIONS)
 
 remove: stop
+	@echo
+	@echo "Removing test container $(CONTAINER_NAME)"
+	@echo "=-=-=-=-=-=-=-=-=-=-="
+	@echo
+	@echo "It is safe to ignore any errors, if the test container has never been started"
+	@echo
 	-@docker rm -f $(CONTAINER_NAME)
 
 run: remove
+	@echo
+	@echo "Running test container $(CONTAINER_NAME)"
+	@echo "=-=-=-=-=-=-=-=-=-=-="
+	@echo
 	docker run -d $(RUN_OPTIONS)
+	@echo
+	@echo "Test container is now running on IP address:"
 	@make ip
 
 stop:
+	@echo
+	@echo "Stopping test container $(CONTAINER_NAME)"
+	@echo "=-=-=-=-=-=-=-=-=-=-="
+	@echo
+	@echo "It is safe to ignore any errors, if the test container is not running"
+	@echo
 	-@docker stop $(CONTAINER_NAME)

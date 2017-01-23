@@ -38,8 +38,7 @@ def buildImage(imageName) {
     return {
         node('docker') {
             checkout scm
-            sh 'cd ' + env.WORKSPACE + '/' + imageName + ' && make build'
-            sh 'cd ' + env.WORKSPACE + '/' + imageName + ' && make publish'
+            sh 'cd ' + env.WORKSPACE + '/' + imageName + ' && make build publish'
         }
     }
 }

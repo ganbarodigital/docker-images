@@ -34,8 +34,12 @@
 
 build:
 	cd ubuntu-server-16.04 && make build
+	cd network-lead && make build
+	cd ubuntu-nginx && make build
 	cd ubuntu-nginx-phpdev-7.0 && make build
 
 publish:
 	cd ubuntu-server-16.04 && make publish
+	cd network-lead && make publish
+	cd ubuntu-nginx && make publish
 	cd ubuntu-nginx-phpdev-7.0 && make publish
