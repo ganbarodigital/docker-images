@@ -36,7 +36,6 @@ MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 # Nginx
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y nginx
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY nginx.php-fpm.conf /etc/nginx/php-fpm.conf
 COPY nginx.drop.conf /etc/nginx/drop.conf
 COPY supervisor.nginx.conf /etc/supervisor/conf.d/nginx.conf
 COPY nginx-logs.sh /usr/local/image-startup
