@@ -35,7 +35,8 @@ MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
 # PHP-FPM for Nginx
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y php-fpm php-dev php-pear php-mysql php-bz2 php-intl php-mbstring php-memcache php-phpdbg php-curl
-RUN sed -i -e 's|;daemonize = yes|daemonize = no|' /etc/php/7.0/fpm/php-fpm.conf
+COPY nginx.php-fpm.conf /etc/nginx/php-fpm.conf
+COPY php-fpm.conf /etc/php/7.0/fpm/php-fpm.conf
 RUN mkdir /run/php
 RUN chown www-data:www-data /run/php
 COPY supervisor.php-fpm.conf /etc/supervisor/conf.d/php-fpm.conf
@@ -43,3 +44,9 @@ COPY fpm.php.ini /etc/php/7.0/fpm/php.ini
 
 # MySQL
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-client
+
+# on startup ...
+COPY startup-php-logs.sh /usr/local/image-startup/20-php-logs.sh
+COPY startup-php-sessions.sh /usr/local/image-startup/20-php-sessions.sh
+RUN chmod 755 /usr/local/image-startup/20-php-logs.sh
+RUN chmod 755 /usr/local/image-startup/20-php-sessions.sh

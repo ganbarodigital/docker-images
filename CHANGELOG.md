@@ -17,6 +17,9 @@
   - added `network-lead`
 - `make XXX` now tells you which image or container it is working with
 - Image startup script now tells you if there are no scripts
+- `ubuntu-nginx-phpdev` now writes more to the mount points
+  - `/logs` now contains the PHP-FPM process log (not just the PHP interpreter log)
+  - `/data/php-sessions` now contains any PHP sessions
 
 ### Fixes
 
