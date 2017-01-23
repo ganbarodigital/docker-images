@@ -2,6 +2,12 @@
 
 ## develop
 
+Nothing atm.
+
+## 2.0.0
+
+Released Monday 23rd Jan 2017.
+
 ### Refactor
 
 - Change our container volumes to be more flexible
@@ -34,7 +40,7 @@
 
 ## 1.0.3
 
-Released Fri 21st Jan 2017.
+Released Fri 20th Jan 2017.
 
 ### Fixes
 
@@ -42,7 +48,7 @@ Released Fri 21st Jan 2017.
 
 ## 1.0.2
 
-Released Fri 21st Jan 2017.
+Released Fri 20th Jan 2017.
 
 ### Fixes
 
@@ -50,7 +56,7 @@ Released Fri 21st Jan 2017.
 
 ## 1.0.1
 
-Released Fri 21st Jan 2017.
+Released Fri 20th Jan 2017.
 
 ### Fixes
 
@@ -58,7 +64,7 @@ Released Fri 21st Jan 2017.
 
 ## 1.0.0
 
-Released Fri 21st Jan 2017.
+Released Fri 20th Jan 2017.
 
 ### New
 
