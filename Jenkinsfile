@@ -18,15 +18,15 @@ stage('Base Image') {
     buildImages(imagesToBuild[0])
 }
 
-stage('Dep 1 Images') {
+stage('1 Dep Images') {
     buildImages(imagesToBuild[1])
 }
 
-stage('Dep 2 Images') {
+stage('2 Dep Images') {
     buildImages(imagesToBuild[2])
 }
 
-stage('Dep 3 Images') {
+stage('3 Dep Images') {
     buildImages(imagesToBuild[3])
 }
 
