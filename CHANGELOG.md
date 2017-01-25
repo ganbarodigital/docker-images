@@ -4,9 +4,14 @@
 
 ### New
 
-* `wordpress-dev` image
+* `wordpress-dev` image added
 * PHP memcached extension added
   - added to `ubuntu-nginx-phpdev`
+* `ping` shell command added
+  - added to `ubuntu-server`
+  - inherited in `ubuntu-nginx`
+  - inherited in `ubuntu-nginx-phpdev`
+  - inherited in `network-lead`
 
 ### Fixes
 
