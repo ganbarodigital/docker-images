@@ -5,6 +5,8 @@
 ### New
 
 * `wordpress-dev` image
+* PHP memcached extension added
+  - added to `ubuntu-nginx-phpdev`
 
 ### Fixes
 
