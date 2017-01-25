@@ -40,4 +40,5 @@ RUN ln -s /etc/nginx/sites-available/wordpress.conf /etc/nginx/sites-enabled/wor
 # We need some tools
 RUN curl https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /usr/bin/wp-cli
 RUN chmod 755 /usr/bin/wp-cli
-RUN ln -s /usr/bin/wp-cli /usr/bin/wp
+COPY wp.sh /usr/bin/wp
+RUN chmod 755 /usr/bin/wp

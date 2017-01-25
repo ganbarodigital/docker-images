@@ -2,6 +2,11 @@
 
 ## develop
 
+### New
+
+* `wordpress-dev`: helper wrapper around `wp-cli`
+  - `/usr/bin/wp` is a helper wrapper that passes `--path` and `--allow-root` into `wp-cli` for you
+
 ## 2.1.0
 
 Released Wednesday 25th Jan 2017.
