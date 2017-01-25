@@ -2,6 +2,10 @@
 
 ## develop
 
+## 2.1.0
+
+Released Wednesday 25th Jan 2017.
+
 ### New
 
 * `wordpress-dev` image added
