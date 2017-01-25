@@ -30,10 +30,14 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-FROM ganbarodigital/ubuntu-server:16.04-2.1.0
+FROM ganbarodigital/ubuntu-nginx-phpdev:7.0-2.1.0
 MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
-# we need a DNS server
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y dnsmasq
-COPY dnsmasq.conf /etc/dnsmasq.conf
-COPY supervisor.dnsmasq.conf /etc/supervisor/conf.d/dnsmasq.conf
+# Our Nginx config file
+COPY nginx.wordpress.conf /etc/nginx/sites-available/wordpress.conf
+RUN ln -s /etc/nginx/sites-available/wordpress.conf /etc/nginx/sites-enabled/wordpress.conf
+
+# We need some tools
+RUN curl https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /usr/bin/wp-cli
+RUN chmod 755 /usr/bin/wp-cli
+RUN ln -s /usr/bin/wp-cli /usr/bin/wp

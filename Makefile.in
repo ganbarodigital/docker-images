@@ -48,7 +48,7 @@ NETWORK?=lamp
 WORKSPACE_DIR=$(shell pwd -L)/../../../
 IMAGES_DIR=$(shell pwd -L)/../../images
 
-BUILD_OPTIONS=--rm=true -t $(IMAGE_NAME):$(IMAGE_LABEL) .
+BUILD_OPTIONS=--rm=true --pull -t $(IMAGE_NAME):$(IMAGE_LABEL) .
 RUN_OPTIONS=--name=$(CONTAINER_NAME) --hostname=$(HOSTNAME) --net=$(NETWORK) --net-alias=$(ALIAS_NAME) -v $(WORKSPACE_DIR):/vagrant -v $(WORKSPACE_DIR):/workspace $(IMAGE_NAME):$(IMAGE_LABEL)
 
 .PHONY: bash build ip publish rebuild remove run stop

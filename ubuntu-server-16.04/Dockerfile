@@ -41,7 +41,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y apt-utils
 
 # misc UNIX commands for use in child images
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y screen tmux curl
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y screen tmux curl iputils-ping
 
 # compilers etc, needed to build things
 # yes, we are putting compilers in an image

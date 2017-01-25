@@ -1,26 +1,33 @@
-stage('Base Image') {
-    def imagesToBuild = [
+def imagesToBuild = [
+    [
         "ubuntu-server-16.04"
-    ]
-
-    buildImages(imagesToBuild)
-}
-
-stage('Dep 1 Images') {
-    def imagesToBuild = [
+    ],
+    [
         "network-lead",
         "ubuntu-nginx"
+    ],
+    [
+        "ubuntu-nginx-phpdev-7.0"
+    ],
+    [
+        "wordpress-dev"
     ]
+]
 
-    buildImages(imagesToBuild)
+stage('Base Image') {
+    buildImages(imagesToBuild[0])
 }
 
-stage('Dep 2 Images') {
-    def imagesToBuild = [
-        "ubuntu-nginx-phpdev-7.0"
-    ]
+stage('1 Dep Images') {
+    buildImages(imagesToBuild[1])
+}
 
-    buildImages(imagesToBuild)
+stage('2 Dep Images') {
+    buildImages(imagesToBuild[2])
+}
+
+stage('3 Dep Images') {
+    buildImages(imagesToBuild[3])
 }
 
 def buildImages(imageList) {
