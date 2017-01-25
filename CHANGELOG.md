@@ -2,7 +2,9 @@
 
 ## develop
 
-Nothing atm.
+### New
+
+* `wordpress-dev` image
 
 ## 2.0.0
 

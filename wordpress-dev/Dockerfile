@@ -30,18 +30,14 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-.PHONEY: build publish
+FROM ganbarodigital/ubuntu-nginx-phpdev:7.0-2.0.0
+MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
-build:
-	cd ubuntu-server-16.04 && make build
-	cd network-lead && make build
-	cd ubuntu-nginx && make build
-	cd ubuntu-nginx-phpdev-7.0 && make build
-	cd wordpress-dev && make build
+# Our Nginx config file
+COPY nginx.wordpress.conf /etc/nginx/sites-available/wordpress.conf
+RUN ln -s /etc/nginx/sites-available/wordpress /etc/nginx/sites-enabled/wordpress
 
-publish:
-	cd ubuntu-server-16.04 && make publish
-	cd network-lead && make publish
-	cd ubuntu-nginx && make publish
-	cd ubuntu-nginx-phpdev-7.0 && make publish
-	cd wordpress-dev && make publish
+# We need some tools
+RUN curl https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /usr/bin/wp-cli
+RUN chmod 755 /usr/bin/wp-cli
+RUN ln -s /usr/bin/wp-cli /usr/bin/wp
