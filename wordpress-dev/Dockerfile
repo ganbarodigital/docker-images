@@ -35,7 +35,7 @@ MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
 # Our Nginx config file
 COPY nginx.wordpress.conf /etc/nginx/sites-available/wordpress.conf
-RUN ln -s /etc/nginx/sites-available/wordpress /etc/nginx/sites-enabled/wordpress
+RUN ln -s /etc/nginx/sites-available/wordpress.conf /etc/nginx/sites-enabled/wordpress.conf
 
 # We need some tools
 RUN curl https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /usr/bin/wp-cli
