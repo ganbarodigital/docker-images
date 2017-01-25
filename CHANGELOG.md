@@ -6,6 +6,10 @@
 
 * `wordpress-dev` image
 
+### Fixes
+
+* Allow Nginx images to include site configs
+
 ## 2.0.0
 
 Released Monday 23rd Jan 2017.
