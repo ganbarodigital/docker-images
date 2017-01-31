@@ -12,6 +12,7 @@
   - inherited in `ubuntu-nginx-phpdev`
   - inherited in `network-lead`
   - inherited in `wordpress-dev`
+* `make rebuild` added to top-level Makefile
 
 ## 2.1.0
 
