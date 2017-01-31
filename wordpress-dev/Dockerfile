@@ -42,3 +42,7 @@ RUN curl https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.ph
 RUN chmod 755 /usr/bin/wp-cli
 COPY wp.sh /usr/bin/wp
 RUN chmod 755 /usr/bin/wp
+
+# On startup ...
+COPY startup-wordpress.sh /usr/local/image-startup/50-wordpress.sh
+RUN chmod 755 /usr/local/image-startup/50-wordpress.sh

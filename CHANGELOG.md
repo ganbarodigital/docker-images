@@ -6,6 +6,7 @@
 
 * `wordpress-dev`: helper wrapper around `wp-cli`
   - `/usr/bin/wp` is a helper wrapper that passes `--path` and `--allow-root` into `wp-cli` for you
+* `wordpress-dev`: support auto-download, install of plugins on startup
 * `sudo` command added (to run scripts as non-root in images)
   - added to `ubuntu-server`
   - inherited in `ubuntu-nginx`
