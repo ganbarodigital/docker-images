@@ -80,6 +80,10 @@ publish:
 	docker push $(IMAGE_NAME):$(IMAGE_LABEL)
 
 rebuild:
+	@echo
+	@echo "Building image $(IMAGE_NAME):$(IMAGE_LABEL)"
+	@echo "=-=-=-=-=-=-=-=-=-=-="
+	@echo
 	-docker rmi -f $(IMAGE_NAME):$(IMAGE_LABEL)
 	docker build --no-cache $(BUILD_OPTIONS)
 
