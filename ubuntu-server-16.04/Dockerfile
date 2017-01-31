@@ -37,11 +37,11 @@ MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 # will return fatal errors :(
 RUN DEBIAN_FRONTEND=noninteractive apt-get update
 
-# Basic stuff to keep Ubuntu happy
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y apt-utils
-
 # Important to keep on top of the latest security fixes et al
 RUN DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
+
+# Basic stuff to keep Ubuntu happy
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y apt-utils
 
 # misc UNIX commands for use in child images
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y screen tmux curl iputils-ping sudo
