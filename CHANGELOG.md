@@ -2,6 +2,12 @@
 
 ## develop
 
+Nothing yet.
+
+## 2.2.0
+
+Released Tuesday 31st Jan 2017.
+
 ### New
 
 * `wordpress-dev`: helper wrapper around `wp-cli`
