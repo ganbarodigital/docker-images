@@ -2,6 +2,25 @@
 
 ## develop
 
+Nothing yet.
+
+## 2.2.0
+
+Released Tuesday 31st Jan 2017.
+
+### New
+
+* `wordpress-dev`: helper wrapper around `wp-cli`
+  - `/usr/bin/wp` is a helper wrapper that passes `--path` and `--allow-root` into `wp-cli` for you
+* `wordpress-dev`: support auto-download, install of plugins on startup
+* `sudo` command added (to run scripts as non-root in images)
+  - added to `ubuntu-server`
+  - inherited in `ubuntu-nginx`
+  - inherited in `ubuntu-nginx-phpdev`
+  - inherited in `network-lead`
+  - inherited in `wordpress-dev`
+* `make rebuild` added to top-level Makefile
+
 ## 2.1.0
 
 Released Wednesday 25th Jan 2017.

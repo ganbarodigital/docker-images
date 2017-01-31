@@ -33,15 +33,18 @@
 FROM ubuntu:16.04
 MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
-# Important to keep on top of the latest security fixes et al
+# We have to run this first, otherwise subsequent `apt-get` commands
+# will return fatal errors :(
 RUN DEBIAN_FRONTEND=noninteractive apt-get update
+
+# Important to keep on top of the latest security fixes et al
 RUN DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
 
 # Basic stuff to keep Ubuntu happy
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y apt-utils
 
 # misc UNIX commands for use in child images
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y screen tmux curl iputils-ping
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y screen tmux curl iputils-ping sudo
 
 # compilers etc, needed to build things
 # yes, we are putting compilers in an image

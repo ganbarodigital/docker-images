@@ -30,7 +30,7 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-FROM ganbarodigital/ubuntu-nginx-phpdev:7.0-2.1.0
+FROM ganbarodigital/ubuntu-nginx-phpdev:7.0-2.2.0
 MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
 # Our Nginx config file
@@ -40,4 +40,9 @@ RUN ln -s /etc/nginx/sites-available/wordpress.conf /etc/nginx/sites-enabled/wor
 # We need some tools
 RUN curl https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /usr/bin/wp-cli
 RUN chmod 755 /usr/bin/wp-cli
-RUN ln -s /usr/bin/wp-cli /usr/bin/wp
+COPY wp.sh /usr/bin/wp
+RUN chmod 755 /usr/bin/wp
+
+# On startup ...
+COPY startup-wordpress.sh /usr/local/image-startup/50-wordpress.sh
+RUN chmod 755 /usr/local/image-startup/50-wordpress.sh
