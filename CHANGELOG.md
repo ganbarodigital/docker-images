@@ -37,7 +37,9 @@
 * Added `make squash` (works in per-image folder)
   - *EXPERIMENTAL*, and may not produce a working image
 * Added `make baseimage` (works in per-image folder)
-  - pulls down latest base image *if* `BASE_IMAGE=yes` is set in local `Makefile`
+  - pulls down latest base image *if* `UPDATE_BASE_IMAGE=always` is set in local `Makefile`
+* Added `make pull` (works in per-image folder)
+  - pulls down latest base image
 
 ## 2.2.0
 

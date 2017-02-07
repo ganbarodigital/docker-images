@@ -48,9 +48,8 @@ NETWORK?=lamp
 IMAGE_TARBALL_DIR=tmp/$(shell dirname $(IMAGE_NAME))
 IMAGE_TARBALL=tmp/$(IMAGE_NAME)-$(IMAGE_LABEL).tar
 
-ifneq ($(origin BASE_IMAGE), undefined)
-	BASE_IMAGE=$(shell grep 'FROM' Dockerfile | cut -d' ' -f2)
-endif
+# we'll need this if we want to update the base image
+BASE_IMAGE=$(shell grep 'FROM' Dockerfile | cut -d' ' -f2)
 
 WORKSPACE_DIR=$(shell pwd -L)/../../../
 IMAGES_DIR=$(shell pwd -L)/../../images
@@ -60,10 +59,10 @@ RUN_OPTIONS=--name=$(CONTAINER_NAME) --hostname=$(HOSTNAME) --net=$(NETWORK) --n
 
 .PHONY: bash build ip publish rebuild remove run stop
 
-all: baseimage bash build ip rebuild remove run squash stop run
+all: baseimage bash build ip pull rebuild remove run squash stop run
 
 baseimage:
-ifneq ($(origin BASE_IMAGE), undefined)
+ifeq ($(UPDATE_BASE_IMAGE), always)
 	@echo
 	@echo "Pulling latest base image $(BASE_IMAGE)"
 	@echo "=-=-=-=-=-=-=-=-=-=-="
@@ -89,6 +88,13 @@ build: remove
 
 ip:
 	@docker inspect -f "{{ .NetworkSettings.Networks.$(NETWORK).IPAddress }}" $(CONTAINER_NAME)
+
+pull:
+	@echo
+	@echo "Pulling latest base image $(BASE_IMAGE)"
+	@echo "=-=-=-=-=-=-=-=-=-=-="
+	@echo
+	docker pull $(BASE_IMAGE)
 
 publish:
 	@echo
