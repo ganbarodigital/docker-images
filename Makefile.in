@@ -32,6 +32,7 @@
 
 # shared makefile for building containers on Linux
 # tested on Ubuntu 16.04
+SHELL=/bin/bash
 BRANCH_NAME := $(shell git describe --tags --exact-match 2>/dev/null || git symbolic-ref -q --short HEAD || echo $(BRANCH_NAME))
 BUILD_LABEL := $(shell echo $(BRANCH_NAME) | sed -e 's|^release/\(.*\)|\1-rc|g;' | sed -e 's|/|-|g;')
 ifeq ($(origin IMAGE_LABEL), undefined)
@@ -44,23 +45,40 @@ CONTAINER_NAME=$(IMAGE_BASENAME)-$(IMAGE_LABEL)-test.$(NETWORK)
 ALIAS_NAME=$(IMAGE_BASENAME).$(NETWORK)
 HOSTNAME=$(IMAGE_BASENAME)
 NETWORK?=lamp
+IMAGE_TARBALL_DIR=tmp/$(shell dirname $(IMAGE_NAME))
+IMAGE_TARBALL=tmp/$(IMAGE_NAME)-$(IMAGE_LABEL).tar
+
+ifneq ($(origin BASE_IMAGE), undefined)
+	BASE_IMAGE=$(shell grep 'FROM' Dockerfile | cut -d' ' -f2)
+endif
 
 WORKSPACE_DIR=$(shell pwd -L)/../../../
 IMAGES_DIR=$(shell pwd -L)/../../images
 
-BUILD_OPTIONS=--rm=true --pull -t $(IMAGE_NAME):$(IMAGE_LABEL) .
+BUILD_OPTIONS=--rm=true -t $(IMAGE_NAME):$(IMAGE_LABEL) .
 RUN_OPTIONS=--name=$(CONTAINER_NAME) --hostname=$(HOSTNAME) --net=$(NETWORK) --net-alias=$(ALIAS_NAME) -v $(WORKSPACE_DIR):/vagrant -v $(WORKSPACE_DIR):/workspace $(IMAGE_NAME):$(IMAGE_LABEL)
 
 .PHONY: bash build ip publish rebuild remove run stop
 
-all: bash build ip rebuild remove run stop run
+all: baseimage bash build ip rebuild remove run squash stop run
 
-bash: remove
+baseimage:
+ifneq ($(origin BASE_IMAGE), undefined)
+	@echo
+	@echo "Pulling latest base image $(BASE_IMAGE)"
+	@echo "=-=-=-=-=-=-=-=-=-=-="
+	@echo
+	docker pull $(BASE_IMAGE)
+else
+	@echo "Using local copy of any base image"
+endif
+
+bash: remove run
 	@echo
 	@echo "Running test container $(CONTAINER_NAME)"
 	@echo "=-=-=-=-=-=-=-=-=-=-="
 	@echo
-	docker run -t -i $(RUN_OPTIONS) /bin/bash
+	docker exec -t -i $(CONTAINER_NAME) /bin/bash
 
 build: remove
 	@echo
@@ -105,6 +123,17 @@ run: remove
 	@echo
 	@echo "Test container is now running on IP address:"
 	@make ip
+
+squash:
+	@echo
+	@echo "Flattening image $(IMAGE_NAME):$(IMAGE_LABEL)"
+	@echo "=-=-=-=-=-=-=-=-=-=-="
+	@echo
+	mkdir -p $(IMAGE_TARBALL_DIR)
+	docker image save $(IMAGE_NAME):$(IMAGE_LABEL) > $(IMAGE_TARBALL)
+	-docker rmi -f $(IMAGE_NAME):$(IMAGE_LABEL)
+	docker image import $(IMAGE_TARBALL) $(IMAGE_NAME):$(IMAGE_LABEL)
+	rm $(IMAGE_TARBALL)
 
 stop:
 	@echo

@@ -15,6 +15,13 @@
   - `ubuntu-nginx-phpdev-7.0` image defaults to PHP-FPM site in `/workspace/app/public`
   - `wordpress-dev` image defaults to PHP-FPM Wordpress site in `/workspace/wordpress`
 
+### Fixes
+
+* `make build` no longer uses `--pull` switch
+  - stops Docker ignoring any locally-build base image
+* `make build` now depends on `make baseimage`
+  - allows us to automatically keep our upstream deps up to date
+
 ### Tweaks
 
 * Reduce number of layers in our base image
@@ -27,6 +34,10 @@
   - `make publish` - build & publish locally-built images up to the hub
   - `make rebuild` - rebuild all images locally
   - `make republish` - rebuild & publish locally-built images up to the hub
+* Added `make squash` (works in per-image folder)
+  - *EXPERIMENTAL*, and may not produce a working image
+* Added `make baseimage` (works in per-image folder)
+  - pulls down latest base image *if* `BASE_IMAGE=yes` is set in local `Makefile`
 
 ## 2.2.0
 
