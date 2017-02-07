@@ -2,7 +2,13 @@
 
 ## develop
 
-Nothing yet.
+### Tools
+
+* Added `bin/make-images.sh` and top-level `Makefile`
+  - `make build` - build all images locally
+  - `make publish` - build & publish locally-built images up to the hub
+  - `make rebuild` - rebuild all images locally
+  - `make republish` - rebuild & publish locally-built images up to the hub
 
 ## 2.2.0
 
