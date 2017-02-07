@@ -2,6 +2,19 @@
 
 ## develop
 
+### New
+
+* Nginx default site is now the only one you need, controlled by new environment vars
+  - `NGINX_SITE_ROOT` - path inside container to your website's root folder
+  - `NGINX_APP_SITE_CONF` - path inside container to website-specific Nginx `server` config block
+  - `NGINX_APP_SERVER_CONF` - path inside container to website-specific CGI/FPM et all support
+  - use `NGINX_DEFAULT_SITE_ROOT`, `NGINX_DEFAULT_APP_SITE_CONF` and `NGINX_DEFAULT_APP_SERVER_CONF` in `Dockerfile` to set defaults
+    - **IMPORTANT** - never set `NGINX_SITE_ROOT`, `NGINX_APP_SITE_ROOT` or `NGINX_APP_SERVER_CONF` in a `Dockerfile`
+    - if you do, this overrides any attempt to set them in your `docker-compose.yml` file
+  - `ubuntu-nginx` image defaults to static site in `/workspace/www`
+  - `ubuntu-nginx-phpdev-7.0` image defaults to PHP-FPM site in `/workspace/app/public`
+  - `wordpress-dev` image defaults to PHP-FPM Wordpress site in `/workspace/wordpress`
+
 ### Tweaks
 
 * Reduce number of layers in our base image

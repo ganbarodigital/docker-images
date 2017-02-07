@@ -30,13 +30,19 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-FROM ganbarodigital/ubuntu-server:16.04-2.2.0
+FROM ganbarodigital/ubuntu-server:16.04-develop
 MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
 # Nginx
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y nginx
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY nginx.drop.conf /etc/nginx/drop.conf
+COPY nginx.images.conf /etc/nginx/images.conf
+COPY nginx.static-site.conf /etc/nginx/static-site.conf
+COPY nginx.default.conf /etc/nginx/sites-available/default
 COPY supervisor.nginx.conf /etc/supervisor/conf.d/nginx.conf
 COPY nginx-logs.sh /usr/local/image-startup/20-nginx-logs.sh
+RUN touch /etc/nginx/empty.conf
 RUN chmod 755 /usr/local/image-startup/20-nginx-logs.sh
+COPY nginx-env-vars.sh /usr/local/image-startup/21-nginx-env-vars.sh
+RUN chmod 755 /usr/local/image-startup/21-nginx-env-vars.sh

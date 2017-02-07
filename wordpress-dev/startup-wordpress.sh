@@ -118,7 +118,7 @@ check_database() {
       STATUS "${PIPESTATUS[0]}"
 
       # If SEARCH_REPLACE is set => Replace URLs
-      if [[ $SEARCH_REPLACE != false ]] ; then
+      if [[ $SEARCH_REPLACE != 'false' ]] ; then
         h3 "Replacing URLs"
         REPLACEMENTS=$(WP search-replace "$BEFORE_URL" "$AFTER_URL" \
           --skip-columns=guid | grep replacement) || \
@@ -256,7 +256,6 @@ check_plugins() {
   # Iterate over each plugin set in $PLUGINS
   while read -r -d, plugin_name; do
     check_plugin $plugin_name
-    plugins[$plugin_name]=$plugin_name
     ((i++))
   done <<< "$PLUGINS"
 
@@ -281,6 +280,7 @@ check_plugin() {
     h3 "($i/$plugin_count) '$plugin_name' not found. Installing..."
     WP plugin install --activate "$plugin_name" |& loglevel
     STATUS "${PIPESTATUS[0]}"
+    plugins[$plugin_name]=$plugin_name
     return
   fi
 
@@ -290,6 +290,7 @@ check_plugin() {
     h3 "($i/$plugin_count) '${plugin_name##*]}' is a local plugin. No download required"
     STATUS SKIP
     activate_plugin "${plugin_name##*]}"
+    plugins[$plugin_name]=$plugin_name
     return
   fi
 
@@ -305,6 +306,7 @@ check_plugin() {
     h3 "($i/$plugin_count) '$plugin_name' not found. Downloading..."
     WP plugin install "$plugin_url" |& loglevel
     STATUS "${PIPESTATUS[0]}"
+    plugins[$plugin_name]=$plugin_name
   fi
 
   activate_plugin "${plugin_name}"
@@ -314,6 +316,7 @@ check_plugin() {
     h3 "($i.5/$plugin_count) Installing 'restful' WP-CLI package..."
     WP package install --activate wp-cli/restful |& loglevel
     STATUS "${PIPESTATUS[0]}"
+    plugins['wp-cli/restful']='wp-cli/restful'
   fi
 }
 
