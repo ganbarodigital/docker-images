@@ -286,10 +286,10 @@ check_plugin() {
 
   # Locally volumed plugins
   if [[ $plugin_name =~ ^\[local\] ]]; then
-    plugins["${plugin_name##*]}"]="${plugin_name##*]}"
     h3 "($i/$plugin_count) '${plugin_name##*]}' is a local plugin. No download required"
     STATUS SKIP
     activate_plugin "${plugin_name##*]}"
+    plugins["${plugin_name##*]}"]="${plugin_name##*]}"
     plugins[$plugin_name]=$plugin_name
     return
   fi
@@ -310,6 +310,7 @@ check_plugin() {
   fi
 
   activate_plugin "${plugin_name}"
+  plugins[$plugin_name]=$plugin_name
 
   # Pretty much guarenteed to need/want 'restful' if you are using 'rest-api'
   if [ "$plugin_name" == 'rest-api' ]; then

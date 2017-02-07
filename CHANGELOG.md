@@ -21,6 +21,7 @@
   - stops Docker ignoring any locally-build base image
 * `make build` now depends on `make baseimage`
   - allows us to automatically keep our upstream deps up to date
+* `wordpress-dev` startup script no longer tries to deactivate plugins that you've listed
 
 ### Tweaks
 
