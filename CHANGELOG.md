@@ -2,6 +2,11 @@
 
 ## develop
 
+### Tweaks
+
+* Reduce number of layers in our base image
+  - updated `ubuntu-server-16.04`
+
 ### Tools
 
 * Added `bin/make-images.sh` and top-level `Makefile`
