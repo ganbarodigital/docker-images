@@ -2,6 +2,10 @@
 
 ## develop
 
+## 3.0.0
+
+Released Thursday 9th Feb 2017.
+
 ### New
 
 * Nginx default site is now the only one you need, controlled by new environment vars
