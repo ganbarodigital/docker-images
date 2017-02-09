@@ -1,0 +1,5 @@
+ubuntu-server-16.04
+network-lead
+ubuntu-nginx
+ubuntu-nginx-phpdev-7.0
+wordpress-dev

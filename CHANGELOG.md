@@ -2,7 +2,49 @@
 
 ## develop
 
-Nothing yet.
+## 3.0.0
+
+Released Thursday 9th Feb 2017.
+
+### New
+
+* Nginx default site is now the only one you need, controlled by new environment vars
+  - `NGINX_SITE_ROOT` - path inside container to your website's root folder
+  - `NGINX_APP_SITE_CONF` - path inside container to website-specific Nginx `server` config block
+  - `NGINX_APP_SERVER_CONF` - path inside container to website-specific CGI/FPM et all support
+  - use `NGINX_DEFAULT_SITE_ROOT`, `NGINX_DEFAULT_APP_SITE_CONF` and `NGINX_DEFAULT_APP_SERVER_CONF` in `Dockerfile` to set defaults
+    - **IMPORTANT** - never set `NGINX_SITE_ROOT`, `NGINX_APP_SITE_ROOT` or `NGINX_APP_SERVER_CONF` in a `Dockerfile`
+    - if you do, this overrides any attempt to set them in your `docker-compose.yml` file
+  - `ubuntu-nginx` image defaults to static site in `/workspace/www`
+  - `ubuntu-nginx-phpdev-7.0` image defaults to PHP-FPM site in `/workspace/app/public`
+  - `wordpress-dev` image defaults to PHP-FPM Wordpress site in `/workspace/wordpress`
+
+### Fixes
+
+* `make build` no longer uses `--pull` switch
+  - stops Docker ignoring any locally-build base image
+* `make build` now depends on `make baseimage`
+  - allows us to automatically keep our upstream deps up to date
+* `wordpress-dev` startup script no longer tries to deactivate plugins that you've listed
+
+### Tweaks
+
+* Reduce number of layers in our base image
+  - updated `ubuntu-server-16.04`
+
+### Tools
+
+* Added `bin/make-images.sh` and top-level `Makefile`
+  - `make build` - build all images locally
+  - `make publish` - build & publish locally-built images up to the hub
+  - `make rebuild` - rebuild all images locally
+  - `make republish` - rebuild & publish locally-built images up to the hub
+* Added `make squash` (works in per-image folder)
+  - *EXPERIMENTAL*, and may not produce a working image
+* Added `make baseimage` (works in per-image folder)
+  - pulls down latest base image *if* `UPDATE_BASE_IMAGE=always` is set in local `Makefile`
+* Added `make pull` (works in per-image folder)
+  - pulls down latest base image
 
 ## 2.2.0
 

@@ -37,5 +37,6 @@
 
 IMAGE_NAME=ganbarodigital/ubuntu-server
 IMAGE_LABEL=16.04
+UPDATE_BASE_IMAGE=always
 
 include ../Makefile.in

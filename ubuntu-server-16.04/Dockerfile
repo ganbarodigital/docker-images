@@ -33,31 +33,32 @@
 FROM ubuntu:16.04
 MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
-# We have to run this first, otherwise subsequent `apt-get` commands
-# will return fatal errors :(
-RUN DEBIAN_FRONTEND=noninteractive apt-get update
+# make sure that apt does not complain
+ENV DEBIAN_FRONTEND=noninteractive
 
-# Important to keep on top of the latest security fixes et al
-RUN DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
-
-# Basic stuff to keep Ubuntu happy
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y apt-utils
-
-# misc UNIX commands for use in child images
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y screen tmux curl iputils-ping sudo
-
-# compilers etc, needed to build things
-# yes, we are putting compilers in an image
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential pkg-config git autoconf automake libtool m4
+# what does this do?
+#
+# 1. make sure we have latest package lists (so apt doesn't crap out)
+# 2. make sure we have latest security fixes
+# 3. tools to stop apt complaining in the logs
+# 4. unix commands that child images will want
+# 5. compilers that child images will want
+RUN set -xe \
+    && apt-get update \
+    && apt-get upgrade -y \
+    && apt-get install -y apt-utils \
+    && apt-get install -y screen tmux curl iputils-ping sudo \
+    && apt-get install -y build-essential pkg-config git autoconf automake libtool m4
 
 # the mount points for Docker volumes
-RUN mkdir -m 0777 /workspace
-RUN mkdir -m 0777 /logs
-RUN mkdir -m 0777 /data
-RUN mkdir -m 0777 /config
+RUN set -xe \
+    && mkdir -m 0777 /workspace \
+    && mkdir -m 0777 /logs \
+    && mkdir -m 0777 /data \
+    && mkdir -m 0777 /config
 
 # Supervisor
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y supervisor
+RUN apt-get install -y supervisor
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 
 # Our image-startup feature

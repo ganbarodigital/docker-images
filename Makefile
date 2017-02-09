@@ -30,25 +30,18 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-.PHONEY: build publish rebuild
+.PHONEY: build publish rebuild republish
 
-build:
-	cd ubuntu-server-16.04 && make build
-	cd network-lead && make build
-	cd ubuntu-nginx && make build
-	cd ubuntu-nginx-phpdev-7.0 && make build
-	cd wordpress-dev && make build
+all: build
 
-rebuild:
-	cd ubuntu-server-16.04 && make rebuild
-	cd network-lead && make rebuild
-	cd ubuntu-nginx && make rebuild
-	cd ubuntu-nginx-phpdev-7.0 && make rebuild
-	cd wordpress-dev && make rebuild
+build: 
+	@bin/make-images.sh build
 
-publish:
-	cd ubuntu-server-16.04 && make publish
-	cd network-lead && make publish
-	cd ubuntu-nginx && make publish
-	cd ubuntu-nginx-phpdev-7.0 && make publish
-	cd wordpress-dev && make publish
+publish: 
+	@bin/make-images.sh build publish
+
+rebuild: 
+	@bin/make-images.sh rebuild
+
+republish: 
+	@bin/make-images.sh rebuild publish
