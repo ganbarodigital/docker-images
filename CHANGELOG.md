@@ -2,6 +2,13 @@
 
 ## develop
 
+### Fixes
+
+* Log suspicious file access attempts
+  - updated in `ubuntu-nginx`
+  - inherited in `ubuntu-nginx-phpdev-7.0`
+  - inherited in `wordpress-dev`
+
 ## 3.0.0
 
 Released Thursday 9th Feb 2017.
