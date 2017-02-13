@@ -4,6 +4,8 @@
 
 ### Fixes
 
+* Make `index.php` default index file for a folder
+  - updated in `wordpress-dev`
 * Log suspicious file access attempts
   - updated in `ubuntu-nginx`
   - inherited in `ubuntu-nginx-phpdev-7.0`
