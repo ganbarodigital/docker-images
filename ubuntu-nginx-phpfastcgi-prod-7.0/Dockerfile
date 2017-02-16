@@ -30,19 +30,20 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-FROM ganbarodigital/ubuntu-server:16.04-3.1.0
+FROM ganbarodigital/ubuntu-nginx-phpdev:7.0-3.1.0
 MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
-# Nginx
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y nginx
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY nginx.drop.conf /etc/nginx/drop.conf
-COPY nginx.images.conf /etc/nginx/images.conf
-COPY nginx.static-site.conf /etc/nginx/static-site.conf
-COPY nginx.default.conf /etc/nginx/sites-available/default
-COPY supervisor.nginx.conf /etc/supervisor/conf.d/nginx.conf
-COPY nginx-logs.sh /usr/local/image-startup/20-nginx-logs.sh
-RUN touch /etc/nginx/empty.conf
-RUN chmod 755 /usr/local/image-startup/20-nginx-logs.sh
-COPY nginx-env-vars.sh /usr/local/image-startup/21-nginx-env-vars.sh
-RUN chmod 755 /usr/local/image-startup/21-nginx-env-vars.sh
+# default value for Nginx param substitutions
+ENV NGINX_DEFAULT_SITE_ROOT=/workspace/app/public
+ENV NGINX_DEFAULT_APP_SERVER_CONF=php-fastcgi.conf
+
+# AppServer configs
+RUN rm /etc/supervisor/conf.d/php-fpm.conf
+RUN rm /etc/nginx/php-fpm.conf
+COPY nginx.php-fastcgi.conf /etc/nginx/php-fastcgi.conf
+COPY nginx.phpfastcgi.conf /etc/nginx/conf.d/phpfastcgi.conf
+COPY supervisor.phpfastcgi.conf /etc/supervisor/conf.d/phpfastcgi.conf
+
+# Production PHP config files
+COPY fpm.php.ini /etc/php/7.0/fpm/php.ini
+COPY php.opcache.ini /etc/php/7.0/mods-available/opcache.ini

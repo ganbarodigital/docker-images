@@ -30,7 +30,7 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-FROM ganbarodigital/ubuntu-nginx:16.04-3.0.0
+FROM ganbarodigital/ubuntu-nginx:16.04-3.1.0
 MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
 # default value for Nginx param substitutions
@@ -39,7 +39,7 @@ ENV NGINX_DEFAULT_APP_SITE_CONF=php-site.conf
 ENV NGINX_DEFAULT_APP_SERVER_CONF=php-fpm.conf
 
 # PHP-FPM for Nginx
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y php-fpm php-dev php-pear php-mysql php-bz2 php-intl php-mbstring php-memcache php-memcached php-phpdbg php-curl php-gd php-imagick
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y php-fpm php-dev php-pear php-mysql php-bz2 php-intl php-mbstring php-memcache php-memcached php-phpdbg php-curl php-gd php-imagick php-bcmath
 COPY nginx.php-fpm.conf /etc/nginx/php-fpm.conf
 COPY nginx.php-site.conf /etc/nginx/php-site.conf
 COPY php-fpm.conf /etc/php/7.0/fpm/php-fpm.conf
@@ -47,6 +47,13 @@ RUN mkdir /run/php
 RUN chown www-data:www-data /run/php
 COPY supervisor.php-fpm.conf /etc/supervisor/conf.d/php-fpm.conf
 COPY fpm.php.ini /etc/php/7.0/fpm/php.ini
+
+# Composer support
+RUN curl https://getcomposer.org/installer -o composer-setup.php \
+    && php composer-setup.php --quiet \
+    && rm composer-setup.php \
+    && mv composer.phar /usr/bin/composer \
+    && chmod 755 /usr/bin/composer
 
 # MySQL
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-client

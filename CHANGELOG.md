@@ -2,6 +2,50 @@
 
 ## develop
 
+## 3.1.0
+
+Released Thursday 16th Feb 2017.
+
+### New
+
+* New image: `ubuntu-nginx-phpfpm-prod-7.0`
+  - Ubuntu 16.04
+  - NGINX
+  - PHP-FPM 7.0
+  - + production configuration
+* New image: `ubuntu-nginx-phpfastcgi-prod-7.0`
+  - Ubuntu 16.04
+  - NGINX
+  - 4 workers for `PHPFastCGI`
+* Added PHP's package manager `composer`
+  - added to `ubuntu-nginx-phpdev-7.0`
+  - inherited in `ubuntu-nginx-phpfpm-prod`
+  - inherited in `ubuntu-nginx-phpfastcgi-prod`
+  - inherited in `wordpress-dev`
+* Added environment vars for the app's root folder
+  - `NGINX_APP_ROOT` - path inside container to your webapp's root folder
+  - use `NGINX_DEFAULT_APP_ROOT` in `Dockerfile` to set defaults
+  - added to `ubuntu-nginx`
+  - inherited in `ubuntu-nginx-phpdev`
+  - inherited in `ubuntu-nginx-phpfpm-prod`
+  - inherited in `ubuntu-nginx-phpfastcgi-prod`
+  - inherited in `wordpress-dev`
+* `NGINX_*` environment vars are now applied to the Supervisor config files too
+  - added to `ubuntu-nginx`
+  - inherited in `ubuntu-nginx-phpdev`
+  - inherited in `ubuntu-nginx-phpfpm-prod`
+  - inherited in `ubuntu-nginx-phpfastcgi-prod`
+  - inherited in `wordpress-dev`
+
+### Fixes
+
+* Make `index.php` default index file for a folder
+  - updated in `wordpress-dev`
+* Log suspicious file access attempts
+  - updated in `ubuntu-nginx`
+  - inherited in `ubuntu-nginx-phpdev-7.0`
+  - inherited in `wordpress-dev`
+
 ## 3.0.0
 
 Released Thursday 9th Feb 2017.

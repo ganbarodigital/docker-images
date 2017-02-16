@@ -3,15 +3,20 @@ def imagesToBuild = [
         "ubuntu-server-16.04"
     ],
     [
+        // depends on "ubuntu-server-16.04"
         "network-lead",
         "ubuntu-nginx"
     ],
     [
+        // depends on ubuntu-nginx
         "ubuntu-nginx-phpdev-7.0"
     ],
     [
+        // depends on ubuntu-nginx-phpdev-7.0
+        "ubuntu-nginx-phpfpm-prod-7.0",
+        "ubuntu-nginx-phpfastcgi-prod-7.0",
         "wordpress-dev"
-    ]
+    ],
 ]
 
 stage('Base Image') {

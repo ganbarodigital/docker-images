@@ -15,7 +15,11 @@ NGINX_SITE_ROOT=${NGINX_SITE_ROOT:-${NGINX_DEFAULT_SITE_ROOT}}
 NGINX_APP_SITE_CONF=${NGINX_APP_SITE_CONF:-${NGINX_DEFAULT_APP_SITE_CONF}}
 NGINX_APP_SERVER_CONF=${NGINX_APP_SERVER_CONF:-${NGINX_DEFAULT_APP_SERVER_CONF}}
 
-# the files we will edit
+# we assume a 'modern' app structure where most of the code lives outside
+# the app's SITE_ROOT for security purposes
+NGINX_APP_ROOT=${NGINX_APP_ROOT:-$(dirname ${NGINX_SITE_ROOT})}
+
+# the NGINX files we will edit
 NGINX_FILES=$(find /etc/nginx -type f)
 
 # let's edit them
@@ -23,4 +27,16 @@ for x in $NGINX_FILES ; do
     sed -i "s|___DEFAULT_ROOT___|${NGINX_SITE_ROOT}|g" $x
     sed -i "s|___APP_SITE_CONF___|${NGINX_APP_SITE_CONF}|g" $x
     sed -i "s|___APP_SERVER_CONF___|${NGINX_APP_SERVER_CONF}|g" $x
+    sed -i "s|___APP_ROOT___|${NGINX_APP_ROOT}|g" $x
+done
+
+# the Supervisord files we will edit
+SUPERVISORD_FILES=$(find /etc/supervisor -type f)
+
+# let's edit them
+for x in $SUPERVISORD_FILES ; do
+    sed -i "s|___DEFAULT_ROOT___|${NGINX_SITE_ROOT}|g" $x
+    sed -i "s|___APP_SITE_CONF___|${NGINX_APP_SITE_CONF}|g" $x
+    sed -i "s|___APP_SERVER_CONF___|${NGINX_APP_SERVER_CONF}|g" $x
+    sed -i "s|___APP_ROOT___|${NGINX_APP_ROOT}|g" $x
 done
