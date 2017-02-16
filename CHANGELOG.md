@@ -2,6 +2,12 @@
 
 ## develop
 
+### New
+
+* Added PHP's package manager `composer`
+  - added to `ubuntu-nginx-phpdev-7.0`
+  - inherited in `wordpress-dev`
+
 ### Fixes
 
 * Make `index.php` default index file for a folder

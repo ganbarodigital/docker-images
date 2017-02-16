@@ -48,6 +48,13 @@ RUN chown www-data:www-data /run/php
 COPY supervisor.php-fpm.conf /etc/supervisor/conf.d/php-fpm.conf
 COPY fpm.php.ini /etc/php/7.0/fpm/php.ini
 
+# Composer support
+RUN curl https://getcomposer.org/installer -o composer-setup.php \
+    && php composer-setup.php --quiet \
+    && rm composer-setup.php \
+    && mv composer.phar /usr/bin/composer \
+    && chmod 755 /usr/bin/composer
+
 # MySQL
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-client
 
