@@ -4,6 +4,11 @@
 
 ### New
 
+* New image: `ubuntu-nginx-phpfpm-prod-7.0`
+  - Ubuntu 16.04
+  - NGINX
+  - PHP-FPM 7.0
+  - + production configuration
 * Added PHP's package manager `composer`
   - added to `ubuntu-nginx-phpdev-7.0`
   - inherited in `wordpress-dev`
