@@ -30,7 +30,7 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-FROM ganbarodigital/ubuntu-nginx:16.04-develop
+FROM ganbarodigital/ubuntu-nginx:16.04-3.1.0
 MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
 # default value for Nginx param substitutions

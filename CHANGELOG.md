@@ -2,6 +2,10 @@
 
 ## develop
 
+## 3.1.0
+
+Released Thursday 16th Feb 2017.
+
 ### New
 
 * New image: `ubuntu-nginx-phpfpm-prod-7.0`
