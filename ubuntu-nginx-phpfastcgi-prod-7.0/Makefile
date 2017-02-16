@@ -31,7 +31,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 # makefile for Ubuntu + Nginx + PHP-FPM
-IMAGE_NAME=ganbarodigital/ubuntu-nginx-phpfpm-prod
+IMAGE_NAME=ganbarodigital/ubuntu-nginx-phpfastcgi-prod
 IMAGE_LABEL=7.0
 
 include ../Makefile.in
