@@ -9,8 +9,14 @@
   - NGINX
   - PHP-FPM 7.0
   - + production configuration
+* New image: `ubuntu-nginx-phpfastcgi-prod-7.0`
+  - Ubuntu 16.04
+  - NGINX
+  - 4 workers for `PHPFastCGI`
 * Added PHP's package manager `composer`
   - added to `ubuntu-nginx-phpdev-7.0`
+  - inherited in `ubuntu-nginx-phpfpm-prod`
+  - inherited in `ubuntu-nginx-phpfastcgi-prod`
   - inherited in `wordpress-dev`
 * Added environment vars for the app's root folder
   - `NGINX_APP_ROOT` - path inside container to your webapp's root folder
@@ -18,10 +24,14 @@
   - added to `ubuntu-nginx`
   - inherited in `ubuntu-nginx-phpdev`
   - inherited in `ubuntu-nginx-phpfpm-prod`
+  - inherited in `ubuntu-nginx-phpfastcgi-prod`
+  - inherited in `wordpress-dev`
 * `NGINX_*` environment vars are now applied to the Supervisor config files too
   - added to `ubuntu-nginx`
   - inherited in `ubuntu-nginx-phpdev`
   - inherited in `ubuntu-nginx-phpfpm-prod`
+  - inherited in `ubuntu-nginx-phpfastcgi-prod`
+  - inherited in `wordpress-dev`
 
 ### Fixes
 
