@@ -19,6 +19,12 @@ NGINX_APP_SERVER_CONF=${NGINX_APP_SERVER_CONF:-${NGINX_DEFAULT_APP_SERVER_CONF}}
 # the app's SITE_ROOT for security purposes
 NGINX_APP_ROOT=${NGINX_APP_ROOT:-$(dirname ${NGINX_SITE_ROOT})}
 
+# tell the user what settings we are using
+echo "Nginx: ___DEFAULT_ROOT___ is ${NGINX_SITE_ROOT}"
+echo "Nginx: ___APP_SITE_CONF___ is ${NGINX_APP_SITE_CONF}"
+echo "Nginx: ___APP_SERVER_CONF___ is ${NGINX_APP_SERVER_CONF}"
+echo "Nginx: ___APP_ROOT___ is ${NGINX_APP_ROOT}"
+
 # the NGINX files we will edit
 NGINX_FILES=$(find /etc/nginx -type f)
 
