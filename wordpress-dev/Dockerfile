@@ -37,6 +37,7 @@ MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 ENV NGINX_DEFAULT_APP_SITE_CONF wordpress.conf
 ENV NGINX_DEFAULT_SITE_ROOT /workspace/wordpress
 COPY nginx.wordpress.conf /etc/nginx/wordpress.conf
+COPY nginx.wordpress-mu.conf /etc/nginx/wordpress-mu.conf
 
 # We need some tools
 RUN curl https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /usr/bin/wp-cli
