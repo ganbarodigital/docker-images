@@ -2,8 +2,14 @@
 
 ## develop
 
+## 3.2.0
+
+Released Tuesday 21st Feb 2017.
+
 ### New
 
+* Initial Wordpress MultiUser support
+  - added to `wordpress-dev`
 * Report values used for `NGINX_*` variables on startup
   - added to `ubuntu-nginx`
   - inherited in `ubuntu-nginx-phpdev-7.0`
