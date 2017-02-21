@@ -30,13 +30,14 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-FROM ganbarodigital/ubuntu-nginx-phpdev:7.0-3.1.0
+FROM ganbarodigital/ubuntu-nginx-phpdev:7.0-3.2.0
 MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
 # Our Nginx config file
 ENV NGINX_DEFAULT_APP_SITE_CONF wordpress.conf
 ENV NGINX_DEFAULT_SITE_ROOT /workspace/wordpress
 COPY nginx.wordpress.conf /etc/nginx/wordpress.conf
+COPY nginx.wordpress-mu.conf /etc/nginx/wordpress-mu.conf
 
 # We need some tools
 RUN curl https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /usr/bin/wp-cli
