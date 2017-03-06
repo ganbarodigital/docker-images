@@ -30,7 +30,7 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-FROM ganbarodigital/ubuntu-server:16.04-3.2.0
+FROM ganbarodigital/ubuntu-server:16.04-develop
 MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
 # Nginx

@@ -30,7 +30,7 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-FROM ganbarodigital/ubuntu-nginx-phpdev:7.0-3.2.0
+FROM ganbarodigital/ubuntu-nginx-phpdev:7.0-develop
 MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
 # default value for Nginx param substitutions
