@@ -2,6 +2,14 @@
 
 ## develop
 
+### New
+
+* Added XML modules to PHP
+  - added to `ubuntu-nginx-phpdev-7.0`
+  - inherited in `ubuntu-nginx-phpfpm-prod`
+  - inherited in `ubuntu-nginx-phpfastci-prod`
+  - inherited in `wordpress-dev`
+
 ## 3.2.0
 
 Released Tuesday 21st Feb 2017.
