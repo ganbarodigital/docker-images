@@ -10,6 +10,10 @@
   - inherited in `ubuntu-nginx-phpfastci-prod`
   - inherited in `wordpress-dev`
 
+### Fixes
+
+* Force rebuild of images on CI
+
 ## 3.2.0
 
 Released Tuesday 21st Feb 2017.
