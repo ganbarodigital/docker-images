@@ -2,6 +2,16 @@
 
 ## develop
 
+## 3.3.0
+
+Released Monday 6th Mar 2017.
+
+### Security
+
+* Ubuntu packages for PHP have been updated
+
+... + any other security fixes Ubuntu have pushed out since we tagged 3.2.0.
+
 ### New
 
 * Added XML modules to PHP
