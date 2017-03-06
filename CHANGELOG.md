@@ -2,6 +2,28 @@
 
 ## develop
 
+## 3.3.0
+
+Released Monday 6th Mar 2017.
+
+### Security
+
+* Ubuntu packages for PHP have been updated
+
+... + any other security fixes Ubuntu have pushed out since we tagged 3.2.0.
+
+### New
+
+* Added XML modules to PHP
+  - added to `ubuntu-nginx-phpdev-7.0`
+  - inherited in `ubuntu-nginx-phpfpm-prod`
+  - inherited in `ubuntu-nginx-phpfastci-prod`
+  - inherited in `wordpress-dev`
+
+### Fixes
+
+* Force rebuild of images on CI
+
 ## 3.2.0
 
 Released Tuesday 21st Feb 2017.
