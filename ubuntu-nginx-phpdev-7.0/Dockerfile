@@ -59,7 +59,9 @@ RUN curl https://getcomposer.org/installer -o composer-setup.php \
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-client
 
 # on startup ...
-COPY startup-php-logs.sh /usr/local/image-startup/20-php-logs.sh
-COPY startup-php-sessions.sh /usr/local/image-startup/20-php-sessions.sh
-RUN chmod 755 /usr/local/image-startup/20-php-logs.sh
-RUN chmod 755 /usr/local/image-startup/20-php-sessions.sh
+COPY startup-php-logs.sh /usr/local/image-startup/30-php-logs.sh
+COPY startup-php-sessions.sh /usr/local/image-startup/30-php-sessions.sh
+COPY startup-php-env-vars.sh /usr/local/image-startup/21-php-env-vars.sh
+RUN chmod 755 /usr/local/image-startup/30-php-logs.sh
+RUN chmod 755 /usr/local/image-startup/30-php-sessions.sh
+RUN chmod 755 /usr/local/image-startup/21-php-env-vars.sh
