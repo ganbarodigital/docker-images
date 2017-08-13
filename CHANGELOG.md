@@ -2,6 +2,10 @@
 
 ## develop
 
+## 3.4.0
+
+Released Sunday 13th August 2017.
+
 ### New
 
 * PHP-FPM timeout support
