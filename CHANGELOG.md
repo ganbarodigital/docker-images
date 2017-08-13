@@ -2,6 +2,23 @@
 
 ## develop
 
+## 3.4.0
+
+Released Sunday 13th August 2017.
+
+### New
+
+* PHP-FPM timeout support
+  - new `PHP_TIMEOUT` environment variable
+  - added to `ubuntu-nginx-phpdev-7.0`
+  - inherited in `ubuntu-nginx-phpfpm-prod`
+  - inherited in `ubuntu-nginx-phpfastcgi-prod`
+  - inherited in `wordpress-dev`
+
+### Security
+
+* Ubuntu packages rebuilt with latest upstream security fixes
+
 ## 3.3.0
 
 Released Monday 6th Mar 2017.
