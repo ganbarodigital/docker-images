@@ -2,6 +2,10 @@
 
 ## develop
 
+### New
+
+* Added `ubuntu-apache2` image
+
 ### Fixes
 
 - removed unused `IMAGES_DIR` from `Makefile.in`
