@@ -11,6 +11,7 @@ def imagesToBuild = [
     [
 		// depends on ubuntu-apache2
 		"ubuntu-apache2-phpfpm-dev-7.0",
+		"ubuntu-apache2-modphp-dev-7.0",
         // depends on ubuntu-nginx
         "ubuntu-nginx-phpdev-7.0"
     ],
