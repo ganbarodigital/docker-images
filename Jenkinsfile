@@ -54,6 +54,8 @@ def buildImage(imageName) {
     return {
         node('docker') {
             checkout scm
+        	sh 'cd ' + env.WORKSPACE + ' && git fetch --tags'
+			sh 'cd ' + env.WORKSPACE + ' && git describe'
             sh 'cd ' + env.WORKSPACE + '/' + imageName + ' && make rebuild publish'
         }
     }
