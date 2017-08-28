@@ -51,8 +51,8 @@ IMAGE_TARBALL=tmp/$(IMAGE_NAME)-$(IMAGE_LABEL).tar
 # we'll need this if we want to update the base image
 BASE_IMAGE=$(shell grep 'FROM' Dockerfile | cut -d' ' -f2)
 
+# this is used when running images via `make run`
 WORKSPACE_DIR=$(shell pwd -L)/../../../
-IMAGES_DIR=$(shell pwd -L)/../../images
 
 BUILD_OPTIONS=--rm=true -t $(IMAGE_NAME):$(IMAGE_LABEL) .
 RUN_OPTIONS=--name=$(CONTAINER_NAME) --hostname=$(HOSTNAME) --net=$(NETWORK) --net-alias=$(ALIAS_NAME) -v $(WORKSPACE_DIR):/vagrant -v $(WORKSPACE_DIR):/workspace $(IMAGE_NAME):$(IMAGE_LABEL)

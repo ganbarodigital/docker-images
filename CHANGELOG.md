@@ -2,6 +2,10 @@
 
 ## develop
 
+### Fixes
+
+- removed unused `IMAGES_DIR` from `Makefile.in`
+
 ## 3.4.0
 
 Released Sunday 13th August 2017.
