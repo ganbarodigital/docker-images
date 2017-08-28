@@ -2,6 +2,15 @@
 
 ## develop
 
+## 3.5.1
+
+Released Monday 28th August 2017.
+
+### Fixes
+
+* Workaround for regressions in Jenkins
+  - need to fetch tags manually now
+
 ## 3.5.0
 
 Released Monday 28th August 2017.
