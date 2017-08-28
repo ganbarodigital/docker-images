@@ -5,9 +5,13 @@ def imagesToBuild = [
     [
         // depends on "ubuntu-server-16.04"
         "network-lead",
+		"ubuntu-apache2",
         "ubuntu-nginx"
     ],
     [
+		// depends on ubuntu-apache2
+		"ubuntu-apache2-phpfpm-dev-7.0",
+		"ubuntu-apache2-modphp-dev-7.0",
         // depends on ubuntu-nginx
         "ubuntu-nginx-phpdev-7.0"
     ],

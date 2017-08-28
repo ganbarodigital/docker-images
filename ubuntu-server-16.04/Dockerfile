@@ -36,6 +36,9 @@ MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 # make sure that apt does not complain
 ENV DEBIAN_FRONTEND=noninteractive
 
+# set our preferred list of Ubuntu package sources
+COPY apt.sources.list /etc/apt/sources.list
+
 # what does this do?
 #
 # 1. make sure we have latest package lists (so apt doesn't crap out)
@@ -47,7 +50,7 @@ RUN set -xe \
     && apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y apt-utils \
-    && apt-get install -y screen tmux curl iputils-ping sudo \
+    && apt-get install -y screen tmux curl iputils-ping sudo vim \
     && apt-get install -y build-essential pkg-config git autoconf automake libtool m4
 
 # the mount points for Docker volumes

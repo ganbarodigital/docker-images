@@ -30,20 +30,24 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-FROM ganbarodigital/ubuntu-nginx-phpdev:7.0-3.5.0
+FROM ganbarodigital/ubuntu-server:16.04-3.5.0
 MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
-# default value for Nginx param substitutions
-ENV NGINX_DEFAULT_SITE_ROOT=/workspace/app/public
-ENV NGINX_DEFAULT_APP_SERVER_CONF=php-fastcgi.conf
+# Apache2
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y apache2
+# these default config files are of questionable benefit
+RUN cd /etc/apache2/conf-enabled && a2disconf *
+# useful modules that everyone will want
+RUN a2enmod headers rewrite
 
-# AppServer configs
-RUN rm /etc/supervisor/conf.d/php-fpm.conf
-RUN rm /etc/nginx/php-fpm.conf
-COPY nginx.php-fastcgi.conf /etc/nginx/php-fastcgi.conf
-COPY nginx.phpfastcgi.conf /etc/nginx/conf.d/phpfastcgi.conf
-COPY supervisor.phpfastcgi.conf /etc/supervisor/conf.d/phpfastcgi.conf
+COPY apache2.envvars /etc/apache2/envvars
+COPY apache2.static-site.conf /etc/apache2/static-site.conf
+COPY apache2.default.conf /etc/apache2/sites-available/000-default.conf
+RUN touch /etc/apache2/empty.conf
 
-# Production PHP config files
-COPY fpm.php.ini /etc/php/7.0/fpm/php.ini
-COPY php.opcache.ini /etc/php/7.0/mods-available/opcache.ini
+COPY supervisor.apache2.conf /etc/supervisor/conf.d/apache2.conf
+
+COPY apache2-logs.sh /usr/local/image-startup/20-apache2-logs.sh
+RUN chmod 755 /usr/local/image-startup/20-apache2-logs.sh
+COPY apache2-env-vars.sh /usr/local/image-startup/21-apache2-env-vars.sh
+RUN chmod 755 /usr/local/image-startup/21-apache2-env-vars.sh

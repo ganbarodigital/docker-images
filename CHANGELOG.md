@@ -2,6 +2,23 @@
 
 ## develop
 
+## 3.5.0
+
+Released Monday 28th August 2017.
+
+### New
+
+* Enabled 'universe' and 'multiverse' packages in `ubuntu-server-16.04`
+  - needed for Apache2 + PHP support
+* Added `vim` to `ubuntu-server-16.04`
+* Added `ubuntu-apache2` image
+* Added `ubuntu-apache2-phpfpm-dev` image
+* Added `ubuntu-apache2-modphp-dev` image
+
+### Fixes
+
+- removed unused `IMAGES_DIR` from `Makefile.in`
+
 ## 3.4.0
 
 Released Sunday 13th August 2017.

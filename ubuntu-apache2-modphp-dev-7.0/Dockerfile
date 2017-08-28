@@ -30,20 +30,38 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-FROM ganbarodigital/ubuntu-nginx-phpdev:7.0-3.5.0
+FROM ganbarodigital/ubuntu-apache2:16.04-3.5.0
 MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
-# default value for Nginx param substitutions
-ENV NGINX_DEFAULT_SITE_ROOT=/workspace/app/public
-ENV NGINX_DEFAULT_APP_SERVER_CONF=php-fastcgi.conf
+# default value for apache2 param substitutions
+ENV APACHE2_DEFAULT_SITE_ROOT=/workspace/app/public
+ENV APACHE2_DEFAULT_APP_SITE_CONF=php-site.conf
+ENV APACHE2_DEFAULT_APP_SERVER_CONF=mod_php.conf
 
-# AppServer configs
-RUN rm /etc/supervisor/conf.d/php-fpm.conf
-RUN rm /etc/nginx/php-fpm.conf
-COPY nginx.php-fastcgi.conf /etc/nginx/php-fastcgi.conf
-COPY nginx.phpfastcgi.conf /etc/nginx/conf.d/phpfastcgi.conf
-COPY supervisor.phpfastcgi.conf /etc/supervisor/conf.d/phpfastcgi.conf
+# Apache2 mod_php support
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libapache2-mod-php7.0
 
-# Production PHP config files
-COPY fpm.php.ini /etc/php/7.0/fpm/php.ini
-COPY php.opcache.ini /etc/php/7.0/mods-available/opcache.ini
+# PHP-FPM for apache2
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y php-fpm php-dev php-pear php-mysql php-bz2 php-intl php-mbstring php-memcache php-memcached php-phpdbg php-curl php-gd php-imagick php-bcmath php-xml
+COPY apache2.mod_php.conf /etc/apache2/mod_php.conf
+COPY apache2.php-site.conf /etc/apache2/php-site.conf
+RUN mkdir /run/php
+RUN chown www-data:www-data /run/php
+
+# Composer support
+RUN curl https://getcomposer.org/installer -o composer-setup.php \
+    && php composer-setup.php --quiet \
+    && rm composer-setup.php \
+    && mv composer.phar /usr/bin/composer \
+    && chmod 755 /usr/bin/composer
+
+# MySQL
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-client
+
+# on startup ...
+COPY startup-php-logs.sh /usr/local/image-startup/30-php-logs.sh
+COPY startup-php-sessions.sh /usr/local/image-startup/30-php-sessions.sh
+COPY startup-php-env-vars.sh /usr/local/image-startup/21-php-env-vars.sh
+RUN chmod 755 /usr/local/image-startup/30-php-logs.sh
+RUN chmod 755 /usr/local/image-startup/30-php-sessions.sh
+RUN chmod 755 /usr/local/image-startup/21-php-env-vars.sh

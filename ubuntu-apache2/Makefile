@@ -30,20 +30,8 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-FROM ganbarodigital/ubuntu-nginx-phpdev:7.0-3.5.0
-MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
+# makefile for Ubuntu + Apache2
+IMAGE_NAME=ganbarodigital/ubuntu-apache2
+IMAGE_LABEL=16.04
 
-# default value for Nginx param substitutions
-ENV NGINX_DEFAULT_SITE_ROOT=/workspace/app/public
-ENV NGINX_DEFAULT_APP_SERVER_CONF=php-fastcgi.conf
-
-# AppServer configs
-RUN rm /etc/supervisor/conf.d/php-fpm.conf
-RUN rm /etc/nginx/php-fpm.conf
-COPY nginx.php-fastcgi.conf /etc/nginx/php-fastcgi.conf
-COPY nginx.phpfastcgi.conf /etc/nginx/conf.d/phpfastcgi.conf
-COPY supervisor.phpfastcgi.conf /etc/supervisor/conf.d/phpfastcgi.conf
-
-# Production PHP config files
-COPY fpm.php.ini /etc/php/7.0/fpm/php.ini
-COPY php.opcache.ini /etc/php/7.0/mods-available/opcache.ini
+include ../Makefile.in
