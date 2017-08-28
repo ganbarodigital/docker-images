@@ -2,6 +2,10 @@
 
 ## develop
 
+## 3.5.0
+
+Released Monday 28th August 2017.
+
 ### New
 
 * Enabled 'universe' and 'multiverse' packages in `ubuntu-server-16.04`
