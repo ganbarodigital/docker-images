@@ -5,6 +5,7 @@
 ### New
 
 * Added `ubuntu-apache2` image
+* Added `ubuntu-apache2-phpfpm-dev` image
 
 ### Fixes
 
