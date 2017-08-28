@@ -23,6 +23,12 @@ def imagesToBuild = [
     ],
 ]
 
+stage('Get missing Git data') {
+    node('docker') {
+        checkout scm
+        sh 'cd ' + env.WORKSPACE + '/' + imageName + ' && git pull --tags'
+    }
+}
 stage('Base Image') {
     buildImages(imagesToBuild[0])
 }
