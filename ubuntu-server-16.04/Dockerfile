@@ -36,6 +36,9 @@ MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 # make sure that apt does not complain
 ENV DEBIAN_FRONTEND=noninteractive
 
+# set our preferred list of Ubuntu package sources
+COPY apt.sources.list /etc/apt/sources.list
+
 # what does this do?
 #
 # 1. make sure we have latest package lists (so apt doesn't crap out)
