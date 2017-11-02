@@ -5,6 +5,8 @@
 ### New
 
 * Added `ubuntu-apache2-wordpress-dev` image
+* Renamed `wordpress-dev` to be `ubuntu-nginx-wordpress-dev`
+* Label on `ubuntu-nginx-wordpress-dev` is now `4.x`
 
 ### Fixes
 
