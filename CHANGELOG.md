@@ -2,6 +2,10 @@
 
 ## develop
 
+### New
+
+* Added `ubuntu-apache2-wordpress-dev` image
+
 ### Fixes
 
 * `ubuntu-apache2-modphp-dev`
