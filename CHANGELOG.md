@@ -2,6 +2,13 @@
 
 ## develop
 
+### Fixes
+
+* `ubuntu-apache2-modphp-dev`
+  - removed any FPM-related packages
+  - startup script now sets env vars correctly
+  - added working opcache config
+
 ## 3.5.1
 
 Released Monday 28th August 2017.

@@ -39,12 +39,11 @@ ENV APACHE2_DEFAULT_APP_SITE_CONF=php-site.conf
 ENV APACHE2_DEFAULT_APP_SERVER_CONF=mod_php.conf
 
 # Apache2 mod_php support
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libapache2-mod-php7.0
-
-# PHP-FPM for apache2
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y php-fpm php-dev php-pear php-mysql php-bz2 php-intl php-mbstring php-memcache php-memcached php-phpdbg php-curl php-gd php-imagick php-bcmath php-xml
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libapache2-mod-php7.0 php-dev php-pear php-mysql php-bz2 php-intl php-mbstring php-memcache php-memcached php-phpdbg php-curl php-gd php-imagick php-bcmath php-xml
 COPY apache2.mod_php.conf /etc/apache2/mod_php.conf
 COPY apache2.php-site.conf /etc/apache2/php-site.conf
+COPY apache2.php.ini /etc/php/7.0/apache2/php.ini
+COPY php.opcache.ini /etc/php/7.0/mods-available/10-opcache.ini
 RUN mkdir /run/php
 RUN chown www-data:www-data /run/php
 
