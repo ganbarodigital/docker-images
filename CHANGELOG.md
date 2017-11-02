@@ -2,6 +2,10 @@
 
 ## develop
 
+## 3.6.0
+
+Released Thursday 2nd November 2017.
+
 ### New
 
 * Added `ubuntu-apache2-wordpress-dev` image
