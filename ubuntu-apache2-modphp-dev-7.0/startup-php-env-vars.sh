@@ -14,11 +14,11 @@ PHP_TIMEOUT=${PHP_TIMEOUT:-${PHP_DEFAULT_TIMEOUT}}
 # tell the user what settings we are using
 echo "PHP: ___PHP_TIMEOUT___ is ${PHP_TIMEOUT}"
 
-# the NGINX files we will edit
-NGINX_FILES=$(find /etc/nginx -type f)
+# the Apache files we will edit
+APACHE_FILES=$(find /etc/apache2 -type f)
 
 # let's edit them
-for x in $NGINX_FILES ; do
+for x in $APACHE_FILES ; do
     sed -i "s|___PHP_TIMEOUT___|${PHP_TIMEOUT}|g" $x
 done
 

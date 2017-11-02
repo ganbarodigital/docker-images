@@ -1,5 +1,5 @@
 # makefile for Ubuntu, Nginx, PHP and Wordpress
-IMAGE_NAME=ganbarodigital/wordpress-dev
-IMAGE_LABEL=4.7.x
+IMAGE_NAME=ganbarodigital/ubuntu-nginx-wordpress-dev
+IMAGE_LABEL=4.x
 
 include ../Makefile.in

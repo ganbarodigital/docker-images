@@ -2,6 +2,23 @@
 
 ## develop
 
+## 3.6.0
+
+Released Thursday 2nd November 2017.
+
+### New
+
+* Added `ubuntu-apache2-wordpress-dev` image
+* Renamed `wordpress-dev` to be `ubuntu-nginx-wordpress-dev`
+* Label on `ubuntu-nginx-wordpress-dev` is now `4.x`
+
+### Fixes
+
+* `ubuntu-apache2-modphp-dev`
+  - removed any FPM-related packages
+  - startup script now sets env vars correctly
+  - added working opcache config
+
 ## 3.5.1
 
 Released Monday 28th August 2017.

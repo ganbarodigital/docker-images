@@ -30,42 +30,20 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-FROM ganbarodigital/ubuntu-apache2:16.04-3.6.0
+FROM ganbarodigital/ubuntu-apache2-modphp-dev:7.0-3.6.0
 MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
-# default value for apache2 param substitutions
-ENV APACHE2_DEFAULT_SITE_ROOT=/workspace/app/public
-ENV APACHE2_DEFAULT_APP_SITE_CONF=php-site.conf
-ENV APACHE2_DEFAULT_APP_SERVER_CONF=php-fpm.conf
+# Our Apache2 config file
+ENV APACHE2_DEFAULT_APP_SITE_CONF wordpress-site.conf
+ENV APACHE2_DEFAULT_SITE_ROOT /workspace/wordpress
+COPY apache2.wordpress-site.conf /etc/apache2/wordpress-site.conf
 
-# Apache2 FPM support
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libapache2-mod-fastcgi
-RUN a2enmod actions fastcgi alias
+# We need some tools
+RUN curl https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /usr/bin/wp-cli
+RUN chmod 755 /usr/bin/wp-cli
+COPY wp.sh /usr/bin/wp
+RUN chmod 755 /usr/bin/wp
 
-# PHP-FPM for apache2
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y php-fpm php-dev php-pear php-mysql php-bz2 php-intl php-mbstring php-memcache php-memcached php-phpdbg php-curl php-gd php-imagick php-bcmath php-xml
-COPY apache2.php-fpm.conf /etc/apache2/php-fpm.conf
-COPY apache2.php-site.conf /etc/apache2/php-site.conf
-COPY php-fpm.conf /etc/php/7.0/fpm/php-fpm.conf
-RUN mkdir /run/php
-RUN chown www-data:www-data /run/php
-COPY supervisor.php-fpm.conf /etc/supervisor/conf.d/php-fpm.conf
-COPY fpm.php.ini /etc/php/7.0/fpm/php.ini
-
-# Composer support
-RUN curl https://getcomposer.org/installer -o composer-setup.php \
-    && php composer-setup.php --quiet \
-    && rm composer-setup.php \
-    && mv composer.phar /usr/bin/composer \
-    && chmod 755 /usr/bin/composer
-
-# MySQL
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-client
-
-# on startup ...
-COPY startup-php-logs.sh /usr/local/image-startup/30-php-logs.sh
-COPY startup-php-sessions.sh /usr/local/image-startup/30-php-sessions.sh
-COPY startup-php-env-vars.sh /usr/local/image-startup/21-php-env-vars.sh
-RUN chmod 755 /usr/local/image-startup/30-php-logs.sh
-RUN chmod 755 /usr/local/image-startup/30-php-sessions.sh
-RUN chmod 755 /usr/local/image-startup/21-php-env-vars.sh
+# On startup ...
+COPY startup-wordpress.sh /usr/local/image-startup/50-wordpress.sh
+RUN chmod 755 /usr/local/image-startup/50-wordpress.sh

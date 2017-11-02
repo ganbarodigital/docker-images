@@ -19,7 +19,8 @@ def imagesToBuild = [
         // depends on ubuntu-nginx-phpdev-7.0
         "ubuntu-nginx-phpfpm-prod-7.0",
         "ubuntu-nginx-phpfastcgi-prod-7.0",
-        "wordpress-dev"
+        "ubuntu-nginx-wordpress-dev",
+        "ubuntu-apache2-wordpress-dev"
     ],
 ]
 

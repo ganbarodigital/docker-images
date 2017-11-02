@@ -3,8 +3,9 @@ network-lead
 ubuntu-apache2
 ubuntu-apache2-phpfpm-dev-7.0
 ubuntu-apache2-modphp-dev-7.0
+ubuntu-apache2-wordpress-dev
 ubuntu-nginx
 ubuntu-nginx-phpdev-7.0
 ubuntu-nginx-phpfpm-prod-7.0
 ubuntu-nginx-phpfastcgi-prod-7.0
-wordpress-dev
+ubuntu-nginx-wordpress-dev
