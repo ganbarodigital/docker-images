@@ -2,6 +2,11 @@
 
 ## develop
 
+### New
+
+* Added `wget`, `docker` and `kubectl` to `ubuntu-server-16.04` image
+  (which means they're now present in all other images)
+
 ## 3.6.0
 
 Released Thursday 2nd November 2017.
