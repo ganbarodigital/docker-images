@@ -11,3 +11,4 @@ ubuntu-nginx-phpfpm-prod-7.0
 ubuntu-nginx-phpfastcgi-prod-7.0
 ubuntu-nginx-wordpress-dev
 ubuntu-openjdk-dev-8
+ubuntu-nodejs-dev-8

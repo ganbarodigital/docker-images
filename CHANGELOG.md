@@ -6,6 +6,7 @@
 
 * Added `ubuntu-openjdk-dev-8` image
   - includes helper script developed by Apache OpenWhisk project
+* Added `ubuntu-nodejs-dev-8` image
 * Added `wget`, `docker` and `kubectl` to `ubuntu-server-16.04` image
   (which means they're now present in all other images)
 
