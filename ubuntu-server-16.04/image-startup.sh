@@ -24,7 +24,7 @@ function run_script()
     fi
 
     echo "- running $1"
-    $x
+    . $x
 }
 
 function run_scripts()
