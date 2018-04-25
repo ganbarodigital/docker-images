@@ -2,6 +2,12 @@
 
 ## develop
 
+## 3.7.0
+
+Released Wednesday 25th April 2018.
+
+Includes latest Ubuntu package updates!
+
 ### New
 
 * Added `ubuntu-openjdk-dev-8` image
