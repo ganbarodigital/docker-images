@@ -30,9 +30,10 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-FROM ganbarodigital/ubuntu-nginx-phpdev:7.0-3.7.0
-MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
+# this is the dev image for NodeJS 8.x LTS on Ubuntu
 
-# Production PHP config files
-COPY fpm.php.ini /etc/php/7.0/fpm/php.ini
-COPY php.opcache.ini /etc/php/7.0/mods-available/opcache.ini
+IMAGE_NAME=ganbarodigital/ubuntu-nodejs-dev
+IMAGE_LABEL=8
+UPDATE_BASE_IMAGE=always
+
+include ../Makefile.in

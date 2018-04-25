@@ -30,9 +30,17 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-FROM ganbarodigital/ubuntu-nginx-phpdev:7.0-3.7.0
+FROM ganbarodigital/ubuntu-server:16.04-3.7.0
 MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
-# Production PHP config files
-COPY fpm.php.ini /etc/php/7.0/fpm/php.ini
-COPY php.opcache.ini /etc/php/7.0/mods-available/opcache.ini
+# we need to pull NodeJS in from somewhere else
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
+    && apt-get install -y nodejs
+
+# default location of our node app
+ENV DEFAULT_NODE_ROOT_DIRECTORY=/workspace/app
+COPY startup-node-env-vars.sh /usr/local/image-startup/30-node-env-vars.sh
+RUN chmod 755 /usr/local/image-startup/30-node-env-vars.sh
+
+# we are going to run the app via Supervisord
+COPY supervisor.nodejs.conf /etc/supervisor/conf.d/nodejs.conf

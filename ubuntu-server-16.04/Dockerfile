@@ -50,8 +50,28 @@ RUN set -xe \
     && apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y apt-utils \
-    && apt-get install -y screen tmux curl iputils-ping sudo vim \
-    && apt-get install -y build-essential pkg-config git autoconf automake libtool m4
+    && apt-get install -y screen tmux curl wget iputils-ping sudo vim \
+    && apt-get install -y build-essential pkg-config git autoconf automake libtool m4 \
+    && apt-get install -y openssl
+
+ENV DOCKER_VERSION 1.12.0
+ENV KUBERNETES_VERSION 1.6.4
+
+# Install docker client
+#
+# we need this for systems like OpenWhisk, which will want to
+# communicate with Docker to spin up new images
+RUN curl -sSL -o docker-${DOCKER_VERSION}.tgz https://get.docker.com/builds/Linux/x86_64/docker-${DOCKER_VERSION}.tgz \
+    && tar --strip-components 1 -xvzf docker-${DOCKER_VERSION}.tgz -C /usr/bin docker/docker \
+    && tar --strip-components 1 -xvzf docker-${DOCKER_VERSION}.tgz -C /usr/bin docker/docker-runc \
+    && rm -f docker-${DOCKER_VERSION}.tgz \
+    && chmod +x /usr/bin/docker \
+    && chmod +x /usr/bin/docker-runc
+
+# Install kubernetes client
+RUN wget --no-verbose https://storage.googleapis.com/kubernetes-release/release/v${KUBERNETES_VERSION}/bin/linux/amd64/kubectl \
+    && chmod +x kubectl \
+    && mv kubectl /usr/bin/kubectl
 
 # the mount points for Docker volumes
 RUN set -xe \

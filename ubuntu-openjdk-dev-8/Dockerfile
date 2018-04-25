@@ -30,9 +30,15 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-FROM ganbarodigital/ubuntu-nginx-phpdev:7.0-3.7.0
+FROM ganbarodigital/ubuntu-server:16.04-3.7.0
 MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
-# Production PHP config files
-COPY fpm.php.ini /etc/php/7.0/fpm/php.ini
-COPY php.opcache.ini /etc/php/7.0/mods-available/opcache.ini
+# make sure that apt does not complain
+ENV DEBIAN_FRONTEND=noninteractive
+
+# OpenJDK + anything else we'll need for JVM-based development
+RUN apt-get install -y openjdk-8-jdk
+
+# this script is useful for converting CONFIG_* env variables
+# into -D* switches to pass into the JDK
+COPY env-to-jdk.sh /usr/local/bin/

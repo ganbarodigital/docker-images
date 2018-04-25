@@ -2,6 +2,25 @@
 
 ## develop
 
+## 3.7.0
+
+Released Wednesday 25th April 2018.
+
+Includes latest Ubuntu package updates!
+
+### New
+
+* Added `ubuntu-openjdk-dev-8` image
+  - includes helper script developed by Apache OpenWhisk project
+* Added `ubuntu-nodejs-dev-8` image
+* Added `wget`, `docker` and `kubectl` to `ubuntu-server-16.04` image
+  (which means they're now present in all other images)
+
+### Fixes
+
+* `image-startup.sh` now sources startup scripts
+  - allows them to set environment variables to pass to container processes
+
 ## 3.6.0
 
 Released Thursday 2nd November 2017.
