@@ -1,4 +1,5 @@
 ubuntu-server-16.04
+memcached-with-config
 network-lead
 ubuntu-apache2
 ubuntu-apache2-phpfpm-dev-7.0
@@ -9,3 +10,4 @@ ubuntu-nginx-phpdev-7.0
 ubuntu-nginx-phpfpm-prod-7.0
 ubuntu-nginx-phpfastcgi-prod-7.0
 ubuntu-nginx-wordpress-dev
+ubuntu-openjdk-dev-8
