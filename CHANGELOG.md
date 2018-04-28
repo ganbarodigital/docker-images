@@ -2,6 +2,10 @@
 
 ## develop
 
+### Maintenance
+
+* `ubuntu-nginx:16.04-*` Dockerfile moved to make space for upcoming `ubuntu-nginx:1804` image
+
 ## 3.7.0
 
 Released Wednesday 25th April 2018.

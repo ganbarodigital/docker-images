@@ -5,8 +5,8 @@ def imagesToBuild = [
     [
         // depends on "ubuntu-server-16.04"
         "network-lead",
-		"ubuntu-apache2",
-        "ubuntu-nginx",
+		"ubuntu-apache2-16.04",
+        "ubuntu-nginx-16.04",
         "ubuntu-openjdk-dev-8",
         "ubuntu-nodejs-dev-8"
     ],
