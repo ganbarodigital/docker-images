@@ -30,12 +30,13 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-# makefile for Ubuntu + dnsmasq + any other tools we need
+# this is the base image that we build all of our other containers
+# on top of
 #
-# make sure you start this first on your docker network
-# it will provide working DNS between your host and all the nodes
-# that you add to this network
-IMAGE_NAME=ganbarodigital/network-lead
-IMAGE_LABEL=16.04
+# we use Ubuntu because things just work with it, with little effort
 
-include ../Makefile.in
+IMAGE_NAME=ganbarodigital/ubuntu-server
+IMAGE_LABEL=16.04
+UPDATE_BASE_IMAGE=always
+
+include ../../Makefile.in

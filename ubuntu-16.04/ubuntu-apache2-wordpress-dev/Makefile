@@ -2,4 +2,4 @@
 IMAGE_NAME=ganbarodigital/ubuntu-apache2-wordpress-dev
 IMAGE_LABEL=4.x
 
-include ../Makefile.in
+include ../../Makefile.in

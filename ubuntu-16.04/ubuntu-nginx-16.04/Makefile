@@ -30,10 +30,8 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-# this is the dev image for NodeJS 8.x LTS on Ubuntu
+# makefile for Ubuntu + Nginx + PHP
+IMAGE_NAME=ganbarodigital/ubuntu-nginx
+IMAGE_LABEL=16.04
 
-IMAGE_NAME=ganbarodigital/ubuntu-nodejs-dev
-IMAGE_LABEL=8
-UPDATE_BASE_IMAGE=always
-
-include ../Makefile.in
+include ../../Makefile.in

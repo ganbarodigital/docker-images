@@ -30,8 +30,12 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-# makefile for Ubuntu + Nginx + PHP-FPM
-IMAGE_NAME=ganbarodigital/ubuntu-nginx-phpfastcgi-prod
-IMAGE_LABEL=7.0
+# makefile for Ubuntu + dnsmasq + any other tools we need
+#
+# make sure you start this first on your docker network
+# it will provide working DNS between your host and all the nodes
+# that you add to this network
+IMAGE_NAME=ganbarodigital/network-lead
+IMAGE_LABEL=16.04
 
-include ../Makefile.in
+include ../../Makefile.in

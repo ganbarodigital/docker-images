@@ -30,13 +30,8 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-# this is the base image that we build all of our other containers
-# on top of
-#
-# we use Ubuntu because things just work with it, with little effort
-
-IMAGE_NAME=ganbarodigital/ubuntu-server
+# makefile for Ubuntu + Apache2
+IMAGE_NAME=ganbarodigital/ubuntu-apache2
 IMAGE_LABEL=16.04
-UPDATE_BASE_IMAGE=always
 
-include ../Makefile.in
+include ../../Makefile.in

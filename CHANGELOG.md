@@ -4,7 +4,8 @@
 
 ### Maintenance
 
-* `ubuntu-nginx:16.04-*` Dockerfile moved to make space for upcoming `ubuntu-nginx:1804` image
+* All the older ubuntu 16.04-based images moved into subfolder
+  - makes space for ubuntu 18.04-based images
 
 ## 3.7.0
 

@@ -30,10 +30,8 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-# this is the dev image for running JVM-based apps on
+# makefile for Ubuntu + Apache2 + PHP-FPM
+IMAGE_NAME=ganbarodigital/ubuntu-apache2-phpfpm-dev
+IMAGE_LABEL=7.0
 
-IMAGE_NAME=ganbarodigital/ubuntu-openjdk-dev
-IMAGE_LABEL=8
-UPDATE_BASE_IMAGE=always
-
-include ../Makefile.in
+include ../../Makefile.in

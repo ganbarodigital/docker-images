@@ -30,8 +30,8 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-# makefile for Ubuntu + Nginx + PHP
-IMAGE_NAME=ganbarodigital/ubuntu-nginx-phpdev
+# makefile for Ubuntu + Apache2 + mod_php
+IMAGE_NAME=ganbarodigital/ubuntu-apache2-modphp-dev
 IMAGE_LABEL=7.0
 
-include ../Makefile.in
+include ../../Makefile.in

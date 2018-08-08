@@ -30,8 +30,10 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-# makefile for Ubuntu + Nginx + PHP-FPM
-IMAGE_NAME=ganbarodigital/ubuntu-nginx-phpfpm-prod
-IMAGE_LABEL=7.0
+# this is the dev image for running JVM-based apps on
 
-include ../Makefile.in
+IMAGE_NAME=ganbarodigital/ubuntu-openjdk-dev
+IMAGE_LABEL=8
+UPDATE_BASE_IMAGE=always
+
+include ../../Makefile.in
