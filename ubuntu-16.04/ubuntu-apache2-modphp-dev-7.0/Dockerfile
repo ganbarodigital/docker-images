@@ -30,7 +30,7 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-FROM ganbarodigital/ubuntu-apache2:16.04-develop
+FROM ganbarodigital/ubuntu-apache2:16.04-20180808.01
 MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
 # default value for apache2 param substitutions

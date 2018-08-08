@@ -30,7 +30,7 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-FROM ganbarodigital/ubuntu-server:16.04-develop
+FROM ganbarodigital/ubuntu-server:16.04-20180808.01
 MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
 # we need to pull NodeJS in from somewhere else
