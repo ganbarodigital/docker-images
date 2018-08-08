@@ -2,6 +2,12 @@
 
 ## develop
 
+### New
+
+* Added `ubuntu-server:18-04` image
+* Added `ubuntu-nginx:18.04` image
+* Added `ubuntu-nginx-phpdev-7.2:18.04` image
+
 ### Maintenance
 
 * All the older ubuntu 16.04-based images moved into subfolder
