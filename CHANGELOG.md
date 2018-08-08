@@ -2,6 +2,12 @@
 
 ## develop
 
+## 20180808.01
+
+Released Wednesday, 8th August 2018.
+
+Includes latest Ubuntu package updates. Switched to a new date-based versioning scheme. I think it makes more sense.
+
 ### New
 
 * Added `ubuntu-server:18-04` image
