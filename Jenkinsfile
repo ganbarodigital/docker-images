@@ -1,28 +1,36 @@
 def imagesToBuild = [
     [
-        "ubuntu-server-16.04"
+        "ubuntu-16.04/ubuntu-server",
+        "ubuntu-18.04/ubuntu-server"
     ],
     [
-        // depends on "ubuntu-server-16.04"
-        "network-lead",
-		"ubuntu-apache2",
-        "ubuntu-nginx",
-        "ubuntu-openjdk-dev-8",
-        "ubuntu-nodejs-dev-8"
+        // depends on "ubuntu-16.04/ubuntu-server"
+        "ubuntu-16.04/network-lead",
+		"ubuntu-16.04/ubuntu-apache2",
+        "ubuntu-16.04/ubuntu-nginx",
+        "ubuntu-16.04/ubuntu-openjdk-dev-8",
+        "ubuntu-16.04/ubuntu-nodejs-dev-8",
+
+        // depends on "ubuntu-18.04/ubuntu-server"
+        "ubuntu-18.04/ubuntu-nginx"
     ],
     [
-		// depends on ubuntu-apache2
-		"ubuntu-apache2-phpfpm-dev-7.0",
-		"ubuntu-apache2-modphp-dev-7.0",
-        // depends on ubuntu-nginx
-        "ubuntu-nginx-phpdev-7.0"
+		// depends on ubuntu-16.04/ubuntu-apache2
+		"ubuntu-16.04/ubuntu-apache2-phpfpm-dev-7.0",
+		"ubuntu-16.04/ubuntu-apache2-modphp-dev-7.0",
+
+        // depends on ubuntu-16.04/ubuntu-nginx
+        "ubuntu-16.04/ubuntu-nginx-phpdev-7.0",
+
+        // depends on ubuntu-18.04/ubuntu-nginx
+        "ubuntu-18.04/ubuntu-nginx-phpdev-7.2"
     ],
     [
         // depends on ubuntu-nginx-phpdev-7.0
-        "ubuntu-nginx-phpfpm-prod-7.0",
-        "ubuntu-nginx-phpfastcgi-prod-7.0",
-        "ubuntu-nginx-wordpress-dev",
-        "ubuntu-apache2-wordpress-dev"
+        "ubuntu-16.04/ubuntu-nginx-phpfpm-prod-7.0",
+        "ubuntu-16.04/ubuntu-nginx-phpfastcgi-prod-7.0",
+        "ubuntu-16.04/ubuntu-nginx-wordpress-dev",
+        "ubuntu-16.04/ubuntu-apache2-wordpress-dev"
     ],
 ]
 

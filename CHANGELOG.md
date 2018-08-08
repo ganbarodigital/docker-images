@@ -2,6 +2,23 @@
 
 ## develop
 
+## 20180808.01
+
+Released Wednesday, 8th August 2018.
+
+Includes latest Ubuntu package updates. Switched to a new date-based versioning scheme. I think it makes more sense.
+
+### New
+
+* Added `ubuntu-server:18-04` image
+* Added `ubuntu-nginx:18.04` image
+* Added `ubuntu-nginx-phpdev-7.2:18.04` image
+
+### Maintenance
+
+* All the older ubuntu 16.04-based images moved into subfolder
+  - makes space for ubuntu 18.04-based images
+
 ## 3.7.0
 
 Released Wednesday 25th April 2018.
