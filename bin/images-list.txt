@@ -1,4 +1,4 @@
-ubuntu-16.04/ubuntu-server-16.04
+ubuntu-16.04/ubuntu-server
 ubuntu-16.04/network-lead
 ubuntu-16.04/ubuntu-apache2
 ubuntu-16.04/ubuntu-apache2-phpfpm-dev-7.0
@@ -11,6 +11,6 @@ ubuntu-16.04/ubuntu-nginx-phpfastcgi-prod-7.0
 ubuntu-16.04/ubuntu-nginx-wordpress-dev
 ubuntu-16.04/ubuntu-openjdk-dev-8
 ubuntu-16.04/ubuntu-nodejs-dev-8
-ubuntu-18.04/ubuntu-server-18.04
+ubuntu-18.04/ubuntu-server
 ubuntu-18.04/ubuntu-nginx
 ubuntu-18.04/ubuntu-nginx-phpdev-7.2
