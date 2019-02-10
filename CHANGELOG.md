@@ -2,6 +2,11 @@
 
 ## develop
 
+### New
+
+* `ubuntu-nginx-phpdev-7.2:18.04` image
+  - added `php-redis` package
+
 ## 20180808.01
 
 Released Wednesday, 8th August 2018.
