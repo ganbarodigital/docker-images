@@ -8,6 +8,8 @@
 * Added `ubuntu-nodejs-dev-10:18.04` image
 * `ubuntu-nginx-phpdev-7.2:18.04` image
   - added `php-redis` package
+* Bump base image Docker to 18.09.5
+* Bump base image kubectl to 1.13.1
 
 ## 20180808.01
 
