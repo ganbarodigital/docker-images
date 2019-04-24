@@ -2,6 +2,10 @@
 
 ## develop
 
+## 20190424.01
+
+Released Wednesday, 24th April 2019.
+
 ### New
 
 * Added `network-lead:18.04` image
