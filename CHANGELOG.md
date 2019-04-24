@@ -2,6 +2,10 @@
 
 ## develop
 
+## 20190424.02
+
+Released Wednesday, 24th April 2019.
+
 ### New
 
 * Added `ubuntu-phpcli:7.2` image
