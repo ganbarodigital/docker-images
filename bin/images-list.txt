@@ -15,4 +15,5 @@ ubuntu-18.04/ubuntu-server
 ubuntu-18.04/network-lead
 ubuntu-18.04/ubuntu-nginx
 ubuntu-18.04/ubuntu-nginx-phpdev-7.2
+ubuntu-18.04/ubuntu-phpcli-7.2
 ubuntu-18.04/ubuntu-nodejs-dev-10

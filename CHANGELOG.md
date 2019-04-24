@@ -2,6 +2,16 @@
 
 ## develop
 
+## 20190424.02
+
+Released Wednesday, 24th April 2019.
+
+### New
+
+* Added `ubuntu-phpcli:7.2` image
+* `ubuntu-nginx-phpdev:7.2` image
+  - switched to v4 of the `phpredis` extension
+
 ## 20190424.01
 
 Released Wednesday, 24th April 2019.
