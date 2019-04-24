@@ -30,7 +30,7 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-FROM ganbarodigital/ubuntu-nginx:18.04-20180808.01
+FROM ganbarodigital/ubuntu-nginx:18.04-develop
 MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
 # default value for Nginx param substitutions
@@ -39,7 +39,7 @@ ENV NGINX_DEFAULT_APP_SITE_CONF=php-site.conf
 ENV NGINX_DEFAULT_APP_SERVER_CONF=php-fpm.conf
 
 # PHP-FPM for Nginx
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y php-fpm php-dev php-pear php-mysql php-bz2 php-intl php-mbstring php-memcache php-memcached php-phpdbg php-curl php-gd php-imagick php-bcmath php-xml
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y php-fpm php-dev php-pear php-mysql php-bz2 php-intl php-mbstring php-memcache php-memcached php-phpdbg php-curl php-gd php-imagick php-bcmath php-xml php-redis
 COPY nginx.php-fpm.conf /etc/nginx/php-fpm.conf
 COPY nginx.php-site.conf /etc/nginx/php-site.conf
 COPY php-fpm.conf /etc/php/7.2/fpm/php-fpm.conf

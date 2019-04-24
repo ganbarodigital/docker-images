@@ -30,7 +30,7 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-FROM ganbarodigital/ubuntu-apache2-modphp-dev:7.0-20180808.01
+FROM ganbarodigital/ubuntu-apache2-modphp-dev:7.0-develop
 MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
 # Our Apache2 config file

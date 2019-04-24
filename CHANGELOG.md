@@ -2,6 +2,19 @@
 
 ## develop
 
+## 20190424.01
+
+Released Wednesday, 24th April 2019.
+
+### New
+
+* Added `network-lead:18.04` image
+* Added `ubuntu-nodejs-dev-10:18.04` image
+* `ubuntu-nginx-phpdev-7.2:18.04` image
+  - added `php-redis` package
+* Bump base image Docker to 18.09.5
+* Bump base image kubectl to 1.13.1
+
 ## 20180808.01
 
 Released Wednesday, 8th August 2018.

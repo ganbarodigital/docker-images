@@ -30,21 +30,17 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-FROM ganbarodigital/ubuntu-nginx-phpdev:7.0-develop
+FROM ganbarodigital/ubuntu-server:18.04-develop
 MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
-# Our Nginx config file
-ENV NGINX_DEFAULT_APP_SITE_CONF wordpress.conf
-ENV NGINX_DEFAULT_SITE_ROOT /workspace/wordpress
-COPY nginx.wordpress.conf /etc/nginx/wordpress.conf
-COPY nginx.wordpress-mu.conf /etc/nginx/wordpress-mu.conf
+# we need to pull NodeJS in from somewhere else
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
+    && apt-get install -y nodejs
 
-# We need some tools
-RUN curl https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /usr/bin/wp-cli
-RUN chmod 755 /usr/bin/wp-cli
-COPY wp.sh /usr/bin/wp
-RUN chmod 755 /usr/bin/wp
+# default location of our node app
+ENV DEFAULT_NODE_ROOT_DIRECTORY=/workspace/app
+COPY startup-node-env-vars.sh /usr/local/image-startup/30-node-env-vars.sh
+RUN chmod 755 /usr/local/image-startup/30-node-env-vars.sh
 
-# On startup ...
-COPY startup-wordpress.sh /usr/local/image-startup/50-wordpress.sh
-RUN chmod 755 /usr/local/image-startup/50-wordpress.sh
+# we are going to run the app via Supervisord
+COPY supervisor.nodejs.conf /etc/supervisor/conf.d/nodejs.conf

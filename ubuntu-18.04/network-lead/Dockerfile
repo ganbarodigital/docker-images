@@ -30,21 +30,10 @@
 # ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-FROM ganbarodigital/ubuntu-nginx-phpdev:7.0-develop
+FROM ganbarodigital/ubuntu-server:18.04-develop
 MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
-# Our Nginx config file
-ENV NGINX_DEFAULT_APP_SITE_CONF wordpress.conf
-ENV NGINX_DEFAULT_SITE_ROOT /workspace/wordpress
-COPY nginx.wordpress.conf /etc/nginx/wordpress.conf
-COPY nginx.wordpress-mu.conf /etc/nginx/wordpress-mu.conf
-
-# We need some tools
-RUN curl https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /usr/bin/wp-cli
-RUN chmod 755 /usr/bin/wp-cli
-COPY wp.sh /usr/bin/wp
-RUN chmod 755 /usr/bin/wp
-
-# On startup ...
-COPY startup-wordpress.sh /usr/local/image-startup/50-wordpress.sh
-RUN chmod 755 /usr/local/image-startup/50-wordpress.sh
+# we need a DNS server
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y dnsmasq
+COPY dnsmasq.conf /etc/dnsmasq.conf
+COPY supervisor.dnsmasq.conf /etc/supervisor/conf.d/dnsmasq.conf
