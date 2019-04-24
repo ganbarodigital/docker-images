@@ -4,6 +4,7 @@
 
 ### New
 
+* Added `network-lead:18.04` image
 * `ubuntu-nginx-phpdev-7.2:18.04` image
   - added `php-redis` package
 
