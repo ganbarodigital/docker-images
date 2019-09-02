@@ -2,6 +2,10 @@
 
 ## develop
 
+### New
+
+* `ubuntu-18.04/network-lead` now gets its config file from `/config/dnsmasq.conf`
+
 ## 20190424.02
 
 Released Wednesday, 24th April 2019.

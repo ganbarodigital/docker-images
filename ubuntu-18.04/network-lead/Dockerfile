@@ -35,5 +35,5 @@ MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
 # we need a DNS server
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y dnsmasq
-COPY dnsmasq.conf /etc/dnsmasq.conf
+COPY dnsmasq.conf /config/dnsmasq.conf
 COPY supervisor.dnsmasq.conf /etc/supervisor/conf.d/dnsmasq.conf
