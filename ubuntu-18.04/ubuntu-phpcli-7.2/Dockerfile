@@ -34,7 +34,7 @@ FROM ganbarodigital/ubuntu-server:18.04-develop
 MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
 # PHP-CLI
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y php-dev php-pear php-mysql php-bz2 php-intl php-mbstring php-memcache php-memcached php-phpdbg php-curl php-gd php-imagick php-bcmath php-xml
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y php-dev php-pear php-mysql php-bz2 php-intl php-mbstring php-memcache php-memcached php-phpdbg php-curl php-gd php-imagick php-bcmath php-xml php-zip
 
 # Composer support
 RUN curl https://getcomposer.org/installer -o composer-setup.php \

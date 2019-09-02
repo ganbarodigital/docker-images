@@ -5,6 +5,10 @@
 ### New
 
 * `ubuntu-18.04/network-lead` now gets its config file from `/config/dnsmasq.conf`
+* `ubuntu-18.04/ubuntu-nginx-phpdev-7.2`:
+  * added ZIP extension
+* `ubuntu-18.04/ubuntu-phpcli-7.2`:
+  * added ZIP extension
 
 ## 20190424.02
 
