@@ -39,7 +39,10 @@ ENV NGINX_DEFAULT_APP_SITE_CONF=php-site.conf
 ENV NGINX_DEFAULT_APP_SERVER_CONF=php-fpm.conf
 
 # PHP-FPM for Nginx
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y php-fpm php-dev php-pear php-mysql php-bz2 php-intl php-mbstring php-memcache php-memcached php-phpdbg php-curl php-gd php-imagick php-bcmath php-xml php-zip
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y php-fpm php-dev php-pear php-mysql php-bz2 php-intl php-mbstring php-memcache php-memcached php-phpdbg php-curl php-gd php-imagick php-bcmath php-xml php-zip \
+    && apt-get autoremove -y \
+    && apt-get clean
+
 COPY nginx.php-fpm.conf /etc/nginx/php-fpm.conf
 COPY nginx.php-site.conf /etc/nginx/php-site.conf
 COPY php-fpm.conf /etc/php/7.2/fpm/php-fpm.conf
@@ -56,7 +59,9 @@ RUN curl https://getcomposer.org/installer -o composer-setup.php \
     && chmod 755 /usr/bin/composer
 
 # MySQL
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-client
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-client \
+    && apt-get autoremove -y \
+    && apt-get clean
 
 # Redis
 RUN pecl install redis

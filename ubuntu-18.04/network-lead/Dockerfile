@@ -34,6 +34,9 @@ FROM ganbarodigital/ubuntu-server:18.04-develop
 MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
 # we need a DNS server
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y dnsmasq
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y dnsmasq \
+    && apt-get autoremove -y \
+    && apt-get clean
+
 COPY dnsmasq.conf /config/dnsmasq.conf
 COPY supervisor.dnsmasq.conf /etc/supervisor/conf.d/dnsmasq.conf

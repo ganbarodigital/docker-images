@@ -34,7 +34,9 @@ FROM ganbarodigital/ubuntu-server:18.04-develop
 MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
 # PHP-CLI
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y php-dev php-pear php-mysql php-bz2 php-intl php-mbstring php-memcache php-memcached php-phpdbg php-curl php-gd php-imagick php-bcmath php-xml php-zip
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y php-dev php-pear php-mysql php-bz2 php-intl php-mbstring php-memcache php-memcached php-phpdbg php-curl php-gd php-imagick php-bcmath php-xml php-zip \
+    && apt-get autoremove -y \
+    && apt-get clean
 
 # Composer support
 RUN curl https://getcomposer.org/installer -o composer-setup.php \
@@ -44,7 +46,9 @@ RUN curl https://getcomposer.org/installer -o composer-setup.php \
     && chmod 755 /usr/bin/composer
 
 # MySQL
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-client
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-client \
+    && apt-get autoremove -y \
+    && apt-get clean
 
 # Redis
 RUN pecl install redis

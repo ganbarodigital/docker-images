@@ -34,7 +34,10 @@ FROM ganbarodigital/ubuntu-server:18.04-develop
 MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
 # Nginx
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y nginx
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y nginx \
+    && apt-get autoremove -y \
+    && apt-get clean
+
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY nginx.drop.conf /etc/nginx/drop.conf
 COPY nginx.images.conf /etc/nginx/images.conf

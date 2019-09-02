@@ -4,6 +4,7 @@
 
 ### New
 
+* All images now run auto-clean after any `apt-get install` commands
 * `ubuntu-18.04/network-lead` now gets its config file from `/config/dnsmasq.conf`
 * `ubuntu-18.04/ubuntu-nginx-phpdev-7.2`:
   * added ZIP extension

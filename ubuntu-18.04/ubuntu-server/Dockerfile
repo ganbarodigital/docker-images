@@ -52,7 +52,9 @@ RUN set -xe \
     && apt-get install -y apt-utils \
     && apt-get install -y screen tmux curl wget iputils-ping sudo vim \
     && apt-get install -y build-essential pkg-config git autoconf automake libtool m4 \
-    && apt-get install -y openssl
+    && apt-get install -y openssl ca-certificates \
+    && apt-get autoremove -y \
+    && apt-get clean
 
 ENV DOCKER_VERSION 18.09.5
 ENV KUBERNETES_VERSION 1.13.5

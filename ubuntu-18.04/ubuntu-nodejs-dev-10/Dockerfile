@@ -35,7 +35,9 @@ MAINTAINER Stuart Herbert <stuherbert@ganbarodigital.com>
 
 # we need to pull NodeJS in from somewhere else
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
-    && apt-get install -y nodejs
+    && apt-get install -y nodejs \
+    && apt-get autoremove -y \
+    && apt-get clean
 
 # default location of our node app
 ENV DEFAULT_NODE_ROOT_DIRECTORY=/workspace/app
